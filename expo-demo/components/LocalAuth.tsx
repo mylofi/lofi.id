@@ -75,7 +75,7 @@ export default function LocalAuth() {
 					isDisabled={loading}
 					onPress={() => signInWithEmail()}
 				>
-					<ButtonText>Sign In</ButtonText>
+					<ButtonText>Login</ButtonText>
 				</Button>
 
 				<Button
@@ -85,7 +85,7 @@ export default function LocalAuth() {
 					isDisabled={loading}
 					onPress={() => signUpWithEmail()}
 				>
-					<ButtonText>Sign Up</ButtonText>
+					<ButtonText>Register</ButtonText>
 				</Button>
 			</VStack>
 		</VStack>
