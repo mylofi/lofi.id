@@ -540,11 +540,15 @@ async function onSyncProvide() {
 	var frameCountEl;
 	var qrCodeHolderDim;
 	var qrCodeImgEl;
+	var qrCodeCnvEl;
+	var whichActiveElem = null;
 	var frames = [];
 	var framesLen = 0;
 	var frameCache = [];
 	var qrImg = null;
 	var intv;
+	var imgLoadPr;
+	var imgLoadTrigger;
 
 	await Swal.fire({
 		title: "Provide Sync",
@@ -588,11 +592,13 @@ async function onSyncProvide() {
 		},
 
 		willClose(popupEl) {
-			includeProfileEl.addEventListener("change",generateFrames,false);
 			clearTimeout(intv);
+			includeProfileEl.removeEventListener("change",generateFrames,false);
+			qrCodeImgEl.removeEventListener("load",onImgLoad,false);
 
-			includeProfileEl = qrCodeHolderEl = qrCodeImgEl = intv =
-				qrImg = frames = frameCache = null;
+			includeProfileEl = qrCodeHolderEl = qrCodeImgEl = qrCodeCnvEl =
+				intv = qrImg = frames = frameCache = imgLoadPr =
+				imgLoadTrigger = null;
 		},
 	});
 
@@ -623,7 +629,7 @@ async function onSyncProvide() {
 		rotateFrame();
 	}
 
-	function rotateFrame() {
+	async function rotateFrame() {
 		// still generating all the frames?
 		//
 		// NOTE: the reason for the "- 1" logic below is
@@ -652,14 +658,39 @@ async function onSyncProvide() {
 					correctLevel : QRCode.CorrectLevel.H,
 				});
 				qrCodeImgEl = qrCodeHolderEl.querySelector("img");
+				qrCodeCnvEl = qrCodeHolderEl.querySelector("canvas");
+
+				qrCodeImgEl.addEventListener("load",onImgLoad,false);
 			}
 			// QR code renderer already present, so just
 			// update the rendered image
 			else {
 				// NOT first frame of (re-)generated frames list?
 				if (frames.length < framesLen) {
+					// need to initially detect which element (img vs canvas)
+					// the qr-code library is rendering with?
+					if (whichActiveElem == null) {
+						whichActiveElem = (
+							(qrCodeImgEl.style.display != "none" && qrCodeCnvEl.style.display == "none") ? "img" :
+							(qrCodeImgEl.style.display == "none" && qrCodeCnvEl.style.display != "none") ? "canvas" :
+							null
+						);
+
+						// if detection failed, we have to bail
+						if (whichActiveElem == null) {
+							return showError("QR code generation does not seem to work properly on this device.");
+						}
+					}
+
 					// cache previous frame's title/src
-					frameCache.push([ qrCodeHolderEl.title, qrCodeImgEl.src, ]);
+					frameCache.push([
+						qrCodeHolderEl.title,
+						(
+							whichActiveElem == "img" ?
+								qrCodeImgEl.src :
+								qrCodeCnvEl.toDataURL("image/png")
+						)
+					]);
 				}
 
 				let frameText = frames.shift();
@@ -675,7 +706,14 @@ async function onSyncProvide() {
 		else {
 			// still need to cache the final frame (title/src)?
 			if (frameCache.length == (framesLen - 1)) {
-				frameCache.push([ qrCodeHolderEl.title, qrCodeImgEl.src, ]);
+				frameCache.push([
+					qrCodeHolderEl.title,
+					(
+						whichActiveElem == "img" ?
+							qrCodeImgEl.src :
+							qrCodeCnvEl.toDataURL("image/png")
+					)
+				]);
 			}
 
 			// rotate frame cache
@@ -685,6 +723,10 @@ async function onSyncProvide() {
 			// render current frame (title/src)
 			qrCodeHolderEl.title = frameEntry[0];
 			qrCodeImgEl.src = frameEntry[1];
+			if (whichActiveElem == "canvas") {
+				await waitImage();
+				qrCodeCnvEl.getContext("2d").drawImage(qrCodeImgEl,0,0);
+			}
 
 			// NOTE: parseInt() here is on purpose, because it
 			// converts the leading, possibly-zero-padded, integer
@@ -693,6 +735,27 @@ async function onSyncProvide() {
 		}
 
 		intv = setTimeout(rotateFrame,150);
+	}
+
+	function onImgLoad() {
+		if (imgLoadTrigger != null) {
+			imgLoadTrigger();
+		}
+		else {
+			imgLoadPr = Promise.resolve();
+		}
+	}
+
+	function waitImage() {
+		return (
+			qrCodeImgEl.complete ||
+			imgLoadPr ||
+			(
+				imgLoadPr = new Promise(r => { imgLoadTrigger = r; })
+				.then(() => { imgLoadPr = imgLoadTrigger = null; })
+				.catch(()=>{})
+			)
+		);
 	}
 }
 
