@@ -10,7 +10,7 @@ import {
 
 import { supabase } from "@/lib/supabase";
 
-export default function ServerAuth() {
+export default function LocalAuth() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [loading, setLoading] = useState(false);
