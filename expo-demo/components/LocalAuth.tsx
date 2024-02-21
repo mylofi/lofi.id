@@ -42,6 +42,10 @@ export default function LocalAuth() {
 		setLoading(false);
 	}
 
+	function receiveSync() {
+		// TODO: Implement receiveSync
+	}
+
 	return (
 		<VStack space="3xl" m="$3">
 			<VStack space="sm">
@@ -86,6 +90,16 @@ export default function LocalAuth() {
 					onPress={() => signUpWithEmail()}
 				>
 					<ButtonText>Register</ButtonText>
+				</Button>
+
+				<Button
+					size="md"
+					variant="solid"
+					action="primary"
+					isDisabled={loading}
+					onPress={() => receiveSync()}
+				>
+					<ButtonText>Receive Sync</ButtonText>
 				</Button>
 			</VStack>
 		</VStack>
