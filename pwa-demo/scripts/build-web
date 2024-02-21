@@ -1,0 +1,56 @@
+#!/usr/bin/env node
+
+"use strict";
+
+var path = require("path");
+var fsp = require("fs/promises");
+
+const DEMO_ROOT_DIR = path.join(__dirname,"..");
+const PKG_ROOT_DIR = path.join(DEMO_ROOT_DIR,"..");
+const SRC_DIR = path.join(PKG_ROOT_DIR,"src");
+const NODE_MODULES_DIR = path.join(PKG_ROOT_DIR,"node_modules");
+const LIBSODIUM_SRC = path.join(NODE_MODULES_DIR,"libsodium","dist","modules","libsodium.js");
+const LIBSODIUM_WRAPPERS_SRC = path.join(NODE_MODULES_DIR,"libsodium-wrappers","dist","modules","libsodium-wrappers.js");
+const BIP39_SRC = path.join(NODE_MODULES_DIR,"bip39","src","wordlists","english.json");
+const ERROR_CAUSE_POLYFILL_DIR = path.join(NODE_MODULES_DIR,"error-cause-polyfill","build","src");
+const WEB_DIR = path.join(DEMO_ROOT_DIR,"web");
+const WEB_JS_DIR = path.join(WEB_DIR,"js");
+const WEB_JS_EXTERNAL_DIR = path.join(WEB_JS_DIR,"external");
+
+
+main().catch(console.log);
+
+
+// **********************
+
+async function main() {
+	console.log("*** Building PWA Demo ***");
+
+	// try to make the js/external/ directory, if needed
+	try {
+		await fsp.mkdir(WEB_JS_EXTERNAL_DIR,0o755);
+	}
+	catch (err) {}
+
+	await Promise.all([
+		fsp.copyFile(
+			BIP39_SRC,
+			path.join(WEB_JS_EXTERNAL_DIR,`bip39-${path.basename(BIP39_SRC)}`)
+		),
+		fsp.cp(
+			ERROR_CAUSE_POLYFILL_DIR,
+			path.join(WEB_JS_EXTERNAL_DIR,"error-cause-polyfill"),
+			{ recursive: true, }
+		),
+		fsp.copyFile(
+			LIBSODIUM_SRC,
+			path.join(WEB_JS_EXTERNAL_DIR,path.basename(LIBSODIUM_SRC))
+		),
+		fsp.copyFile(
+			LIBSODIUM_WRAPPERS_SRC,
+			path.join(WEB_JS_EXTERNAL_DIR,path.basename(LIBSODIUM_WRAPPERS_SRC))
+		),
+	]);
+
+	console.log("Complete.");
+}

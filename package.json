@@ -1,0 +1,27 @@
+{
+	"name": "lofi-id",
+	"version" : "0.0.1",
+	"scripts": {
+		"pwa:build:web": "pwa-demo/scripts/build-web",
+		"pwa:start": "npx http-server ./pwa-demo/web/ -p 8080"
+	},
+	"dependencies": {
+		"bip39": "~3.1.0",
+		"error-cause-polyfill": "~3.0.0",
+		"libsodium": "~0.7.13",
+		"libsodium-wrappers": "~0.7.13"
+	},
+	"repository": "i8Soft/lofi.id",
+	"keywords": [
+		"encryption",
+		"identity",
+		"demo"
+	],
+	"bugs": {
+		"url": "https://github.com/i8Soft/lofi.id/issues",
+		"email": "getify@gmail.com"
+	},
+	"homepage": "i8Soft/lofi.id",
+	"author": "Kyle Simpson <getify@gmail.com>",
+	"license": "MIT"
+}
