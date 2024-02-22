@@ -1,4 +1,4 @@
-import sodium from "react-native-sodium";
+import sodium from "react-native-libsodium";
 import { generateEntropy } from "./pwa-utils";
 
 export {
@@ -9,6 +9,8 @@ export {
 // *************************
 
 function generateAsymmetricKey(iv = generateEntropy(32)) {
+	console.log("sodium:", sodium.crypto_sign_ed25519_pk_to_curve25519);
+	console.log("sodium:", sodium.crypto_sign_seed_keypair);
 	try {
 		let ed25519KeyPair = sodium.crypto_sign_seed_keypair(iv);
 		return {
@@ -23,6 +25,7 @@ function generateAsymmetricKey(iv = generateEntropy(32)) {
 			),
 		};
 	} catch (err) {
+		console.log("err:", err);
 		throw new Error("Asymmetric key generation failed.", { cause: err });
 	}
 

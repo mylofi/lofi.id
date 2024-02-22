@@ -7,6 +7,7 @@ import {
 	InputField,
 	VStack,
 } from "@gluestack-ui/themed";
+import { router } from "expo-router";
 
 import { supabase } from "@/lib/supabase";
 
@@ -98,7 +99,7 @@ export default function LocalAuth() {
 					variant="solid"
 					action="primary"
 					isDisabled={loading}
-					onPress={() => register()}
+					onPress={() => router.navigate("/register")}
 				>
 					<ButtonText>Register</ButtonText>
 				</Button>

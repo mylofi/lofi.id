@@ -1,17 +1,12 @@
-export {
-	//generateEntropy,
-	getDeferred,
-	logError,
-	sanitize,
-	cancelEvt,
-};
+import sodium from "react-native-libsodium";
+
+export { generateEntropy, getDeferred, logError, sanitize, cancelEvt };
 
 // *************************
 
-// TODO: get sodium to work in react-native
-// function generateEntropy(numBytes = 16) {
-// 	return sodium.randombytes_buf(numBytes);
-// }
+function generateEntropy(numBytes = 16) {
+	return sodium.randombytes_buf(numBytes);
+}
 
 function getDeferred() {
 	var def = {};
