@@ -1,0 +1,163 @@
+<div class="gradient">
+	<svg viewBox="0 0 965 1078" fill="none">
+		<g opacity="0.8">
+			<g>
+				<ellipse
+					cx="222.599"
+					cy="277.706"
+					rx="641.842"
+					ry="699.982"
+					fill="url(#paint0_radial_2913_5676)"
+				></ellipse>
+			</g>
+			<g>
+				<ellipse
+					cx="-82.2838"
+					cy="30.7211"
+					rx="463.716"
+					ry="505.721"
+					fill="url(#paint1_radial_2913_5676)"
+				></ellipse>
+			</g>
+		</g>
+		<defs>
+			<radialGradient
+				id="paint0_radial_2913_5676"
+				cx="0"
+				cy="0"
+				r="1"
+				gradientUnits="userSpaceOnUse"
+				gradientTransform="translate(222.599 277.706) rotate(90) scale(780.255 715.448)"
+			>
+				<stop offset="0%" stop-color="#5D4178"></stop>
+				<stop
+					offset="100%"
+					stop-color="#2D1248"
+					stop-opacity="0"
+				></stop>
+			</radialGradient>
+			<radialGradient
+				id="paint1_radial_2913_5676"
+				cx="0"
+				cy="0"
+				r="1"
+				gradientUnits="userSpaceOnUse"
+				gradientTransform="translate(-82.2838 30.7211) rotate(90) scale(563.717 516.895)"
+			>
+				<stop offset="0%" stop-color="#6212B1"></stop>
+				<stop
+					offset="100%"
+					stop-color="#220044"
+					stop-opacity="0"
+				></stop>
+			</radialGradient>
+		</defs>
+	</svg>
+</div>
+
+<div class="parent-container">
+	<div class="flex-col-gap">
+		<div class="flex-col">
+			<div class="logo-container">
+				<img
+					class="logo"
+					src="https://localfirstweb.dev/assets/images/logo.svg"
+					alt="Local-First Community Logo"
+				/>
+			</div>
+
+			<h1 class="heading">Local-First Auth</h1>
+		</div>
+
+		<div class="form-group">
+			<input type="text" />
+			<button>Login</button>
+			<button>Register</button>
+			<button>Receive Sync</button>
+		</div>
+	</div>
+</div>
+
+<style>
+	body {
+		margin: 0;
+	}
+
+	.gradient {
+		z-index: -1;
+		position: absolute;
+		background-color: black;
+		width: 100%;
+		height: 100%;
+	}
+
+	.parent-container {
+		display: flex;
+		justify-content: center;
+		font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+			"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	}
+
+	.flex-col-gap {
+		display: flex;
+		flex-direction: column;
+		gap: 6rem;
+	}
+
+	.flex-col {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.logo-container {
+		text-align: center;
+	}
+
+	.logo {
+		display: inline-block;
+		width: 8rem;
+	}
+
+	.heading {
+		margin: 0;
+		text-align: center;
+		font-weight: 700;
+		color: white;
+		font-size: 2.25rem;
+		line-height: 2.5rem;
+	}
+
+	.form-group {
+		display: flex;
+		flex-direction: column;
+		gap: 0.625rem;
+	}
+
+	input {
+		border-radius: 0.25rem;
+		padding: 0.5rem;
+		border: none;
+		height: 2.5rem;
+		font-size: 1rem;
+		line-height: 1.5rem;
+	}
+
+	button {
+		border-radius: 0.25rem;
+		background-color: #0077e6;
+		padding: 0.5rem;
+		color: #ffffff;
+		height: 2.5rem;
+		border: none;
+		font-size: 1rem;
+		line-height: 1.5rem;
+	}
+
+	button:hover {
+		cursor: pointer;
+	}
+
+	button:active {
+		background-color: #172554;
+	}
+</style>
