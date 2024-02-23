@@ -27,32 +27,6 @@ export default function LocalAuth() {
 		setLoading(false);
 	}
 
-	async function register() {
-		// var profileName = await promptProfileName();
-		// if (!profileName) {
-		// 	return promptWelcome();
-		// }
-		// var registrationInfo = await promptRegistration();
-		// if (!registrationInfo) {
-		// 	return promptWelcome();
-		// }
-		// var keyInfo = await generateAsymmetricKey();
-		// saveLoginSession({
-		// 	profileName,
-		// 	...keyInfo,
-		// });
-		// if (await saveProfile(profileName,registrationInfo)) {
-		// 	currentProfile = registrationInfo;
-		// }
-		// else {
-		// 	clearLoginSession();
-		// 	await showError("Profile registration not saved. Please try again.");
-		// 	return promptWelcome();
-		// }
-		// var loginKeyWords = (await toMnemonic(keyInfo.iv)).join(" ");
-		// await confirmRegistration(profileName,loginKeyWords);
-		// return showProfile();
-	}
 
 	function receiveSync() {
 		// TODO: Implement receiveSync

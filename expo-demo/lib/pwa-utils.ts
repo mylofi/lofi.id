@@ -33,3 +33,25 @@ function cancelEvt(evt) {
 		evt.stopImmediatePropagation();
 	}
 }
+export function packKeyInfo(keyInfo) {
+	console.log("PWA-utils packKeyInfo: ", keyInfo);
+	return Object.assign(
+		{ ...keyInfo },
+		Object.fromEntries(
+			Object.entries(keyInfo)
+				.filter(([key]) =>
+					[
+						"publicKey",
+						"privateKey",
+						"encPK",
+						"encSK",
+						"iv",
+					].includes(key)
+				)
+				.map(([key, value]) => [
+					key,
+					sodium.to_base64(value, sodium.base64_variants.ORIGINAL),
+				])
+		)
+	);
+}

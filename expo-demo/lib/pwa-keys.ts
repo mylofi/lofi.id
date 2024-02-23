@@ -1,4 +1,9 @@
-import sodium from "react-native-libsodium";
+import sodium, {
+	crypto_sign_ed25519_pk_to_curve25519,
+	crypto_sign_seed_keypair,
+	crypto_sign_ed25519_sk_to_curve25519,
+} from "react-native-libsodium";
+
 import { generateEntropy } from "./pwa-utils";
 
 export {
@@ -9,18 +14,18 @@ export {
 // *************************
 
 function generateAsymmetricKey(iv = generateEntropy(32)) {
-	console.log("sodium:", sodium.crypto_sign_ed25519_pk_to_curve25519);
-	console.log("sodium:", sodium.crypto_sign_seed_keypair);
+	console.log("sodium:", crypto_sign_ed25519_pk_to_curve25519);
+	console.log("sodium:", crypto_sign_seed_keypair);
 	try {
-		let ed25519KeyPair = sodium.crypto_sign_seed_keypair(iv);
+		let ed25519KeyPair = crypto_sign_seed_keypair(iv);
 		return {
 			iv,
 			publicKey: ed25519KeyPair.publicKey,
 			privateKey: ed25519KeyPair.privateKey,
-			encPK: sodium.crypto_sign_ed25519_pk_to_curve25519(
+			encPK: crypto_sign_ed25519_pk_to_curve25519(
 				ed25519KeyPair.publicKey
 			),
-			encSK: sodium.crypto_sign_ed25519_sk_to_curve25519(
+			encSK: crypto_sign_ed25519_sk_to_curve25519(
 				ed25519KeyPair.privateKey
 			),
 		};
@@ -32,11 +37,43 @@ function generateAsymmetricKey(iv = generateEntropy(32)) {
 	throw new Error("Asymmetric key generation failed.");
 }
 
+export async function encryptText(text: string, pkBuffer) {
+	try {
+		let dataBuffer = new TextEncoder().encode(text);
+		let encData = sodium.crypto_box_seal(dataBuffer, pkBuffer);
+		return sodium.to_base64(encData, sodium.base64_variants.ORIGINAL);
+	} catch (err) {
+		throw new Error("Text encryption failed.", { cause: err });
+	}
+
+	throw new Error("Text encryption failed.");
+}
+
+export async function decryptText(encText, pkBuffer, skBuffer) {
+	try {
+		let dataBuffer = sodium.from_base64(
+			encText,
+			sodium.base64_variants.ORIGINAL
+		);
+		dataBuffer = sodium.crypto_box_seal_open(
+			dataBuffer,
+			pkBuffer,
+			skBuffer
+		);
+		return new TextDecoder().decode(dataBuffer);
+	} catch (err) {
+		throw new Error("Text decryption failed.", { cause: err });
+	}
+
+	throw new Error("Text decryption failed.");
+}
+
+
 // async function deriveSharedKeys(localPublicKeyBuffer,localPrivateKeyBuffer,remotePublicKeyBuffer,isOriginator = true) {
 // 	try {
 // 		// convert exchanged Ed25519 curve keys to X25519 curve keys
-// 		let localPK = sodium.crypto_sign_ed25519_pk_to_curve25519(localPublicKeyBuffer);
-// 		let localSK = sodium.crypto_sign_ed25519_sk_to_curve25519(localPrivateKeyBuffer);
+// 		let localPK = crypto_sign_ed25519_pk_to_curve25519(localPublicKeyBuffer);
+// 		let localSK = crypto_sign_ed25519_sk_to_curve25519(localPrivateKeyBuffer);
 // 		let remotePK = sodium.crypto_sign_ed25519_pk_to_curve25519(remotePublicKeyBuffer);
 // 		let sharedKeys;
 

@@ -14,8 +14,9 @@ import {
 	set,
 } from "@gluestack-ui/themed";
 import { router } from "expo-router";
-import { readStoredProfiles } from "@/lib/pwa-app";
+import { readStoredProfiles, saveLoginSession, saveProfile } from "@/lib/pwa-app";
 import { generateAsymmetricKey } from "@/lib/pwa-keys";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Profile() {
 	const [firstName, setFirstName] = useState("");
@@ -25,7 +26,7 @@ export default function Profile() {
 	const [lastNameError, setLastNameError] = useState("");
 	const [emailError, setEmailError] = useState("");
 
-	function handleSubmit() {
+	async function handleSubmit() {
 		const profiles = readStoredProfiles();
 		const sanitizedFirstName = firstName.trim();
 		const sanitizedLastName = lastName.trim();
@@ -51,6 +52,28 @@ export default function Profile() {
 
 		const keyInfo = generateAsymmetricKey();
 		console.log("keyInfo:", keyInfo);
+		// TODO: profileName from the previous register pag as url
+		const profileName = "FixMe";
+		await saveLoginSession({
+			profileName,
+			...keyInfo,
+		});
+		AsyncStorage.getItem("login-session").then((result) =>
+			console.log("login-session stored value: ", result)
+		);
+
+		const profileInfo = {
+			first_name: sanitizedFirstName,
+			last_name: sanitizedLastName,
+			email: sanitizedEmail,
+		};
+		console.log("Profile info: ", profileInfo);
+		saveProfile(keyInfo.encPK, profileName, profileInfo);
+
+		// var loginKeyWords = (await toMnemonic(keyInfo.iv)).join(" ");
+		// await confirmRegistration(profileName, loginKeyWords);
+
+		// return showProfile();
 	}
 
 	function cancel() {
