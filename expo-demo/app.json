@@ -22,7 +22,12 @@
 				"foregroundImage": "./assets/images/adaptive-icon.png",
 				"backgroundColor": "#ffffff"
 			},
-			"package": "com.anonymous.exporouterv3"
+			"package": "com.anonymous.exporouterv3",
+			"permissions": [
+				"android.permission.WRITE_CAMERA",
+				"android.permission.RECORD_AUDIO",
+				"android.permission.MODIFY_AUDIO_SETTINGS"
+			]
 		},
 		"web": {
 			"bundler": "metro",
