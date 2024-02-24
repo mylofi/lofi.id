@@ -28,7 +28,7 @@ export default function Home() {
 					$lg-mx="$5"
 					justifyContent="space-between"
 				>
-					<Header />
+					<Header>Local-First Auth</Header>
 					{session && session.user ? <Account /> : <LocalAuth />}
 				</Box>
 			</ScrollView>
