@@ -1,6 +1,6 @@
 import { Box, Heading, Image } from "@gluestack-ui/themed";
 
-export default function Header() {
+export default function Header({ children }: { children: React.ReactNode }) {
 	return (
 		<Box alignItems="center">
 			<Image
@@ -12,7 +12,7 @@ export default function Header() {
 			/>
 
 			<Heading color="$white" size="2xl">
-				Local-First Auth
+				{children}
 			</Heading>
 		</Box>
 	);
