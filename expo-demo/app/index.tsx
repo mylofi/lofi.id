@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { Box, ScrollView } from "@gluestack-ui/themed";
 
-import Gradient from "@/assets/Icons/Gradient";
 import { ServerAuthSessionContext } from "@/context/ServerAuthSessionContext";
 
 import Account from "@/components/Account";
+import BackgroundGradient from "@/components/BackgroundGradient";
 import Header from "@/components/Header";
 import LocalAuth from "@/components/LocalAuth";
 
@@ -17,15 +17,7 @@ export default function Home() {
 				style={{ height: "100%" }}
 				contentContainerStyle={{ flexGrow: 1 }}
 			>
-				<Box
-					position="absolute"
-					$base-h={500}
-					$base-w={500}
-					$lg-h={500}
-					$lg-w={500}
-				>
-					<Gradient />
-				</Box>
+				<BackgroundGradient />
 
 				<Box
 					height="60%"
