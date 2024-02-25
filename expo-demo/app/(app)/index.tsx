@@ -3,13 +3,13 @@ import { router } from "expo-router";
 import { Button, ButtonText, Heading, VStack } from "@gluestack-ui/themed";
 
 import { LoginSessionContext } from "@/context/LoginSessionContext";
-import AuthLayout from "@/components/AuthLayout";
+import Layout from "@/components/Layout";
 
 export default function AppIndex() {
 	const { setLoginSession } = useContext(LoginSessionContext);
 
 	return (
-		<AuthLayout>
+		<Layout>
 			<VStack space="4xl">
 				<Heading color="$white" size="2xl">
 					You are logged in
@@ -28,6 +28,6 @@ export default function AppIndex() {
 					<ButtonText>Log Out</ButtonText>
 				</Button>
 			</VStack>
-		</AuthLayout>
+		</Layout>
 	);
 }
