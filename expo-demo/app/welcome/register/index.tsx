@@ -27,6 +27,7 @@ export default function Register() {
 
 	return (
 		<>
+			<Stack.Screen options={{ headerTitle: "Register" }} />
 		</>
 	);
 }
