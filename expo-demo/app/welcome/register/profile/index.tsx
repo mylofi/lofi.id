@@ -38,6 +38,8 @@ export default function Profile() {
 	const [loginKeyWords, setLoginKeyWords] = useState("");
 	const [modalVisible, setModalVisible] = useState(false);
 
+	// TODO: handle loading states
+
 	return (
 		<>
 			<Stack.Screen options={{ headerTitle: "Profile Info" }} />
