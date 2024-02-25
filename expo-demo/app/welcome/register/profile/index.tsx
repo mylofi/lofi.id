@@ -49,6 +49,83 @@ export default function Profile() {
 						Profile
 					</Heading>
 
+					<FormControl isInvalid={firstNameError !== ""}>
+						<FormControlLabel>
+							<FormControlLabelText color="$white">
+								First Name
+							</FormControlLabelText>
+						</FormControlLabel>
+
+						<Input>
+							<InputField
+								onChangeText={(text) => {
+									setFirstNameError("");
+									setFirstName(text);
+								}}
+								value={firstName}
+								autoCapitalize="words"
+								color="$white"
+							/>
+						</Input>
+
+						<FormControlError>
+							<FormControlErrorText>
+								{firstNameError}
+							</FormControlErrorText>
+						</FormControlError>
+					</FormControl>
+
+					<FormControl isInvalid={lastNameError !== ""}>
+						<FormControlLabel>
+							<FormControlLabelText color="$white">
+								Last Name
+							</FormControlLabelText>
+						</FormControlLabel>
+
+						<Input>
+							<InputField
+								onChangeText={(text) => {
+									setLastNameError("");
+									setLastName(text);
+								}}
+								value={lastName}
+								autoCapitalize="words"
+								color="$white"
+							/>
+						</Input>
+
+						<FormControlError>
+							<FormControlErrorText>
+								{lastNameError}
+							</FormControlErrorText>
+						</FormControlError>
+					</FormControl>
+
+					<FormControl isInvalid={emailError !== ""}>
+						<FormControlLabel>
+							<FormControlLabelText color="$white">
+								Email
+							</FormControlLabelText>
+						</FormControlLabel>
+
+						<Input>
+							<InputField
+								onChangeText={(text) => {
+									setEmailError("");
+									setEmail(text);
+								}}
+								value={email}
+								autoCapitalize="none"
+								color="$white"
+							/>
+						</Input>
+
+						<FormControlError>
+							<FormControlErrorText>
+								{emailError}
+							</FormControlErrorText>
+						</FormControlError>
+					</FormControl>
 
 					<VStack space="sm">
 						<Button onPress={() => handleSubmit()}>
