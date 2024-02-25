@@ -22,3 +22,5 @@ import RegistrationConfirmationModal from "@/components/RegistrationConfirmation
 
 import type { WebView } from "react-native-webview";
 
+export default function Profile() {
+}
