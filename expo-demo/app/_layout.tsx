@@ -12,11 +12,9 @@ import { config } from "@gluestack-ui/config";
 import { useColorScheme } from "@/components/useColorScheme";
 import { Slot } from "expo-router";
 
-import { ServerAuthSessionContext } from "@/context/ServerAuthSessionContext";
-import { supabase } from "@/lib/supabase";
+import { LoginSessionContext } from "@/context/LoginSessionContext";
 
-import type { Session } from "@supabase/supabase-js";
-import { Stack } from "expo-router";
+import type { LoginSession } from "@/context/LoginSessionContext";
 
 export {
 	// Catch any errors thrown by the Layout component.
