@@ -40,6 +40,50 @@ export default function Profile() {
 
 	// TODO: handle loading states
 
+	function handleSubmit() {
+		const sanitizedFirstName = firstName.trim();
+		const sanitizedLastName = lastName.trim();
+		const sanitizedEmail = email.trim().toLowerCase();
+
+		if (!sanitizedFirstName) {
+			setFirstNameError("Please enter your first name.");
+		}
+
+		if (!sanitizedLastName) {
+			setLastNameError("Please enter your last name.");
+		}
+
+		if (
+			!sanitizedEmail ||
+			!/[^@]+@[^@.]+(?:\.[^]+)+/.test(sanitizedEmail)
+		) {
+			setEmailError("Please enter a valid email address.");
+		}
+
+		if (
+			!sanitizedFirstName ||
+			!sanitizedLastName ||
+			!sanitizedEmail ||
+			!/[^@]+@[^@.]+(?:\.[^]+)+/.test(sanitizedEmail)
+		) {
+			return;
+		}
+
+		const message = {
+			type: "register",
+			payload: {
+				profileName,
+				registrationInfo: {
+					firstName: sanitizedFirstName,
+					lastName: sanitizedLastName,
+					email: sanitizedEmail,
+				},
+			},
+		};
+
+		webViewRef.current?.postMessage(JSON.stringify(message));
+	}
+
 	return (
 		<>
 			<Stack.Screen options={{ headerTitle: "Profile Info" }} />
