@@ -25,6 +25,28 @@ export default function Register() {
 	const { profileName, setProfileName } = useContext(ProfileNameContext);
 	const [profileNameError, setProfileNameError] = useState("");
 
+	function handleCreateProfileName() {
+		const sanitizedProfileName = sanitize(profileName);
+
+		if (sanitizedProfileName === "" || sanitizedProfileName.length > 30) {
+			setProfileNameError("Please enter a value from 1-30 characters.");
+			return;
+		}
+
+		// TODO: readStoredProfiles is not fully implemented, so the check for
+		// existing profiles is not working yet.
+		const profiles = readStoredProfiles();
+		if (sanitizedProfileName in profiles) {
+			setProfileNameError(
+				`Profile '${sanitizedProfileName}' is already registered on this device.`
+			);
+			return;
+		}
+
+		setProfileName(sanitizedProfileName);
+		router.navigate("/welcome/register/profile");
+	}
+
 	return (
 		<>
 			<Stack.Screen options={{ headerTitle: "Register" }} />
@@ -62,7 +84,7 @@ export default function Register() {
 					</FormControl>
 
 					<VStack space="sm">
-						<Button onPress={() => handleCreate()}>
+						<Button onPress={() => handleCreateProfileName()}>
 							<ButtonText>Create</ButtonText>
 						</Button>
 
