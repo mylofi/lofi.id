@@ -55,44 +55,18 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
 	const colorScheme = useColorScheme();
-	const [session, setSession] = useState<Session | null>(null);
-
-	useEffect(() => {
-		supabase.auth.getSession().then(({ data: { session } }) => {
-			setSession(session);
-		});
-
-		supabase.auth.onAuthStateChange((_event, session) => {
-			setSession(session);
-		});
-	}, []);
+	const [loginSession, setLoginSession] = useState<LoginSession | null>(null);
 
 	return (
 		<GluestackUIProvider config={config}>
 			<ThemeProvider
 				value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
 			>
-				<ServerAuthSessionContext.Provider value={session}>
-					{/* <Slot /> */}
-					<Stack>
-						<Stack.Screen
-							name="index"
-							options={{ headerTitle: "Home" }}
-						/>
-						<Stack.Screen
-							name="register/index"
-							options={{
-								headerTitle: "Register",
-							}}
-						/>
-						<Stack.Screen
-							name="register/profile/index"
-							options={{
-								headerTitle: "Profile Info",
-							}}
-						/>
-					</Stack>
-				</ServerAuthSessionContext.Provider>
+				<LoginSessionContext.Provider
+					value={{ loginSession, setLoginSession }}
+				>
+					<Slot />
+				</LoginSessionContext.Provider>
 			</ThemeProvider>
 		</GluestackUIProvider>
 	);
