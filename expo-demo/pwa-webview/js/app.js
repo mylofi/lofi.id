@@ -269,10 +269,20 @@ function sendToReactNative(message) {
 	window.ReactNativeWebView.postMessage(message);
 }
   
-	var registrationInfo = await promptRegistration();
-	if (!registrationInfo) {
-		return promptWelcome();
-	}
+/**
+ * @param {string} profileName
+ * @param {{firstName: string; lastName: string; email: string}} registrationInfo
+ */
+export async function register(profileName, registrationInfo) {
+	// var profileName = await promptProfileName();
+	// if (!profileName) {
+	// 	return promptWelcome();
+	// }
+
+	// var registrationInfo = await promptRegistration();
+	// if (!registrationInfo) {
+	// 	return promptWelcome();
+	// }
 
 	var keyInfo = await generateAsymmetricKey();
 	saveLoginSession({
@@ -290,7 +300,16 @@ function sendToReactNative(message) {
 	}
 
 	var loginKeyWords = (await toMnemonic(keyInfo.iv)).join(" ");
-	await confirmRegistration(profileName,loginKeyWords);
+	// await confirmRegistration(profileName,loginKeyWords);
+
+	const message = {
+		type: "register",
+		payload: {
+		  loginSession,
+		  loginKeyWords,
+		}
+	};
+	sendToReactNative(JSON.stringify(message));
 
 	return showProfile();
 }
