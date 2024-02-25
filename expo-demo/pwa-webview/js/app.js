@@ -262,12 +262,13 @@ async function promptLogin() {
 	}
 }
 
-async function register() {
-	var profileName = await promptProfileName();
-	if (!profileName) {
-		return promptWelcome();
-	}
-
+/**
+ * @param {string} message
+ */
+function sendToReactNative(message) {
+	window.ReactNativeWebView.postMessage(message);
+}
+  
 	var registrationInfo = await promptRegistration();
 	if (!registrationInfo) {
 		return promptWelcome();
