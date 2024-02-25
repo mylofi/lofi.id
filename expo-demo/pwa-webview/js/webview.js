@@ -1,11 +1,21 @@
 import { register } from "./app.js";
 
-window.addEventListener("message", (event) => {
-	const data = JSON.parse(event.data);
+window.addEventListener("message", async (event) => {
+	let data;
+
+	try {
+		data = JSON.parse(event.data);
+	} catch (error) {
+		alert(`Error parsing message: ${error}`);
+		return;
+	}
 
 	switch (data.type) {
 		case "register":
-			register(data.payload.profileName, data.payload.registrationInfo);
+			await register(
+				data.payload.profileName,
+				data.payload.registrationInfo
+			);
 			break;
 
 		default:
