@@ -53,6 +53,7 @@ export default function Profile() {
 							<ButtonText>Submit</ButtonText>
 						</Button>
 
+						{/* TODO: clear profileName on cancel */}
 						<Button onPress={() => router.navigate("/welcome")}>
 							<ButtonText>Cancel</ButtonText>
 						</Button>
