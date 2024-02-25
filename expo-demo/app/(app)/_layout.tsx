@@ -1,19 +1,26 @@
+import { useContext, useEffect, useState } from "react";
 import { Text } from "react-native";
 import { Redirect, Stack } from "expo-router";
 
-import { useSession } from "@/context/ctx";
+import { LoginSessionContext } from "@/context/LoginSessionContext";
 
 export default function AppLayout() {
-	const { session, isLoading } = useSession();
+	const { loginSession, setLoginSession } = useContext(LoginSessionContext);
+	const [loading, setLoading] = useState(true);
+
+	// TODO: Add logic to check if user is already logged in on app start here.
+	useEffect(() => {
+		setLoading(false);
+	}, [loginSession, setLoginSession]);
 
 	// You can keep the splash screen open, or render a loading screen like we do here.
-	if (isLoading) {
+	if (loading) {
 		return <Text>Loading...</Text>;
 	}
 
 	// Only require authentication within the (app) group's layout as users
 	// need to be able to access the (auth) group and sign in again.
-	if (!session) {
+	if (!loginSession) {
 		// On web, static rendering will stop here as the user is not authenticated
 		// in the headless Node process that the pages are rendered in.
 		return <Redirect href="/welcome/" />;
