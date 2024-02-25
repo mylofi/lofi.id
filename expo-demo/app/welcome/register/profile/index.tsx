@@ -40,6 +40,9 @@ export default function Profile() {
 
 	return (
 		<>
+			<Stack.Screen options={{ headerTitle: "Profile Info" }} />
+			<Layout>
+			</Layout>
 		</>
 	);
 }
