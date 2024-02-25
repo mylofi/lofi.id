@@ -30,6 +30,10 @@ export default function Register() {
 			<Stack.Screen options={{ headerTitle: "Register" }} />
 			<Layout>
 				<VStack space="md">
+					<Heading color="$white" size="2xl">
+						Profile Name
+					</Heading>
+
 				</VStack>
 			</Layout>
 		</>
