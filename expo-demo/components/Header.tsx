@@ -6,9 +6,10 @@ export default function Header({ children }: { children: React.ReactNode }) {
 			<Image
 				size="lg"
 				source={{
+					// TODO: Use a relative path to local asset instead.
 					uri: "https://localfirstweb.dev/assets/images/logo.png",
 				}}
-				alt="Local First Web"
+				alt="Local-First Community Logo"
 			/>
 
 			<Heading color="$white" size="2xl">
