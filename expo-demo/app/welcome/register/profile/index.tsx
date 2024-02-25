@@ -47,6 +47,16 @@ export default function Profile() {
 						Profile
 					</Heading>
 
+
+					<VStack space="sm">
+						<Button onPress={() => handleSubmit()}>
+							<ButtonText>Submit</ButtonText>
+						</Button>
+
+						<Button onPress={() => router.navigate("/welcome")}>
+							<ButtonText>Cancel</ButtonText>
+						</Button>
+					</VStack>
 				</VStack>
 
 				<PWAWebView
