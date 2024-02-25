@@ -34,6 +34,42 @@ export default function Register() {
 						Profile Name
 					</Heading>
 
+					<FormControl isInvalid={profileNameError !== ""}>
+						<FormControlLabel>
+							<FormControlLabelText color="$white">
+								Please enter a profile name (username).
+							</FormControlLabelText>
+						</FormControlLabel>
+
+						<Input>
+							<InputField
+								onChangeText={(text) => {
+									setProfileNameError("");
+									setProfileName(text);
+								}}
+								value={profileName}
+								autoCapitalize="none"
+								maxLength={30}
+								color="$white"
+							/>
+						</Input>
+
+						<FormControlError>
+							<FormControlErrorText>
+								{profileNameError}
+							</FormControlErrorText>
+						</FormControlError>
+					</FormControl>
+
+					<VStack space="sm">
+						<Button onPress={() => handleCreate()}>
+							<ButtonText>Create</ButtonText>
+						</Button>
+
+						<Button onPress={() => router.navigate("/welcome")}>
+							<ButtonText>Cancel</ButtonText>
+						</Button>
+					</VStack>
 				</VStack>
 			</Layout>
 		</>
