@@ -16,7 +16,7 @@ var syncProvideBtn = null;
 var deleteProfileBtn = null;
 var addNoteBtn = null;
 
-main().catch(logError);
+// main().catch(logError);
 
 
 // *************************
