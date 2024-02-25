@@ -42,6 +42,12 @@ export default function Profile() {
 		<>
 			<Stack.Screen options={{ headerTitle: "Profile Info" }} />
 			<Layout>
+				<VStack space="md">
+					<Heading color="$white" size="2xl">
+						Profile
+					</Heading>
+
+				</VStack>
 			</Layout>
 		</>
 	);
