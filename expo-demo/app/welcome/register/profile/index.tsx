@@ -23,4 +23,19 @@ import RegistrationConfirmationModal from "@/components/RegistrationConfirmation
 import type { WebView } from "react-native-webview";
 
 export default function Profile() {
+	const { profileName } = useContext(ProfileNameContext);
+
+	const webViewRef = useRef<WebView>(null);
+
+	const [firstName, setFirstName] = useState("");
+	const [lastName, setLastName] = useState("");
+	const [email, setEmail] = useState("");
+
+	const [firstNameError, setFirstNameError] = useState("");
+	const [lastNameError, setLastNameError] = useState("");
+	const [emailError, setEmailError] = useState("");
+
+	const [loginKeyWords, setLoginKeyWords] = useState("");
+	const [modalVisible, setModalVisible] = useState(false);
+
 }
