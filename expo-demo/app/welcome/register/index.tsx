@@ -29,6 +29,8 @@ export default function Register() {
 		<>
 			<Stack.Screen options={{ headerTitle: "Register" }} />
 			<Layout>
+				<VStack space="md">
+				</VStack>
 			</Layout>
 		</>
 	);
