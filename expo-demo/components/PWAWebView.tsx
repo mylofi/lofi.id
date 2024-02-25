@@ -40,6 +40,9 @@ export default forwardRef(function (
 						// Show the registration confirmation modal with login keywords.
 						setLoginKeyWords(data.payload.loginKeyWords);
 						setModalVisible(true);
+
+					default:
+						console.log(`Unknown message type: ${data.type}`);
 				}
 			}}
 		/>
