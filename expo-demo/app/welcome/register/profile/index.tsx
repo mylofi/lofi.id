@@ -23,7 +23,7 @@ import RegistrationConfirmationModal from "@/components/RegistrationConfirmation
 import type { WebView } from "react-native-webview";
 
 export default function Profile() {
-	const { profileName } = useContext(ProfileNameContext);
+	const { profileName, setProfileName } = useContext(ProfileNameContext);
 
 	const webViewRef = useRef<WebView>(null);
 
@@ -176,8 +176,13 @@ export default function Profile() {
 							<ButtonText>Submit</ButtonText>
 						</Button>
 
-						{/* TODO: clear profileName on cancel */}
-						<Button onPress={() => router.navigate("/welcome")}>
+						{/* TODO: DRY up this with cancel button on /welcome/register */}
+						<Button
+							onPress={() => {
+								setProfileName("");
+								router.navigate("/welcome");
+							}}
+						>
 							<ButtonText>Cancel</ButtonText>
 						</Button>
 					</VStack>

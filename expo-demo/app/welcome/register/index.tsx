@@ -88,7 +88,12 @@ export default function Register() {
 							<ButtonText>Create</ButtonText>
 						</Button>
 
-						<Button onPress={() => router.navigate("/welcome")}>
+						<Button
+							onPress={() => {
+								setProfileName("");
+								router.navigate("/welcome");
+							}}
+						>
 							<ButtonText>Cancel</ButtonText>
 						</Button>
 					</VStack>
