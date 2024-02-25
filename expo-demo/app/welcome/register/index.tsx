@@ -21,3 +21,5 @@ import { ProfileNameContext } from "@/context/ProfileNameContext";
 
 import Layout from "@/components/Layout";
 
+export default function Register() {
+}
