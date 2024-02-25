@@ -48,6 +48,17 @@ export default function Profile() {
 					</Heading>
 
 				</VStack>
+
+				<PWAWebView
+					ref={webViewRef}
+					setLoginKeyWords={setLoginKeyWords}
+					setModalVisible={setModalVisible}
+				/>
+
+				<RegistrationConfirmationModal
+					loginKeyWords={loginKeyWords}
+					modalVisible={modalVisible}
+				/>
 			</Layout>
 		</>
 	);
