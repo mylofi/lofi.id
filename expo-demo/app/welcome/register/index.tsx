@@ -25,4 +25,8 @@ export default function Register() {
 	const { profileName, setProfileName } = useContext(ProfileNameContext);
 	const [profileNameError, setProfileNameError] = useState("");
 
+	return (
+		<>
+		</>
+	);
 }
