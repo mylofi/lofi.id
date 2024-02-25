@@ -20,3 +20,11 @@ import {
 
 import { LoginSessionContext } from "@/context/LoginSessionContext";
 
+export default function RegistrationConfirmationModal({
+	loginKeyWords,
+	modalVisible,
+}: {
+	loginKeyWords: string;
+	modalVisible: boolean;
+}) {
+}
