@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="css/style.css" />
+		<title>Lofi.ID Demo</title>
+	</head>
+	<body>
+		<div id="profile-details" class="hidden">
+			<p>
+				<span id="current-profile-name"></span>
+				<button type="button" id="logout-btn">logout</button>
+				<button type="button" id="sync-provide-btn">
+					provide sync
+				</button>
+				<button type="button" id="delete-profile-btn">
+					delete profile
+				</button>
+			</p>
+			<p id="profile-info"></p>
+			<hr />
+			<p>
+				<input type="text" id="new-note" placeholder="add a note..." />
+				<button type="button" id="add-note-btn">add</button>
+			</p>
+			<ul id="profile-notes"></ul>
+		</div>
+
+		<!-------------------------->
+
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script src="//cdn.jsdelivr.net/npm/qrcodejs@1/qrcode.js"></script>
+		<script src="js/external/libsodium.js"></script>
+		<script src="js/external/libsodium-wrappers.js"></script>
+		<script type="module" src="js/app.js"></script>
+	</body>
+</html>
