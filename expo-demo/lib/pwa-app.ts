@@ -45,7 +45,7 @@ async function saveLoginSession(
 	session: LoginSession,
 	setLoginSession: Dispatch<SetStateAction<LoginSession | null>>
 ) {
-	setLoginSession(session);
+	setLoginSession(packKeyInfo(session));
 	try {
 		await AsyncStorage.setItem(
 			"login-session",
