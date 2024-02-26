@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useState } from "react";
 import { Stack, router } from "expo-router";
 import {
 	Button,
@@ -14,20 +14,15 @@ import {
 	VStack,
 } from "@gluestack-ui/themed";
 
+import { register } from "@/lib/pwa-app";
+
 import { ProfileNameContext } from "@/context/ProfileNameContext";
 
 import Layout from "@/components/Layout";
-// import PWAWebView from "@/components/PWAWebView";
 import RegistrationConfirmationModal from "@/components/RegistrationConfirmationModal";
-import { generateAsymmetricKey } from "@/lib/pwa-keys";
-
-import type { WebView } from "react-native-webview";
-import { register } from "@/lib/pwa-app";
 
 export default function Profile() {
 	const { profileName, setProfileName } = useContext(ProfileNameContext);
-
-	const webViewRef = useRef<WebView>(null);
 
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
@@ -76,22 +71,8 @@ export default function Profile() {
 			lastName: sanitizedLastName,
 			email: sanitizedEmail,
 		});
-		console.log("loginKeyWords:", loginKeyWords);
 		console.log("loginSession:", loginSession);
-
-		// const message = {
-		// 	type: "register",
-		// 	payload: {
-		// 		profileName,
-		// 		registrationInfo: {
-		// 			firstName: sanitizedFirstName,
-		// 			lastName: sanitizedLastName,
-		// 			email: sanitizedEmail,
-		// 		},
-		// 	},
-		// };
-
-		// webViewRef.current?.postMessage(JSON.stringify(message));
+		console.log("loginKeyWords:", loginKeyWords);
 	}
 
 	return (
@@ -197,12 +178,6 @@ export default function Profile() {
 						</Button>
 					</VStack>
 				</VStack>
-
-				{/* <PWAWebView
-					ref={webViewRef}
-					setLoginKeyWords={setLoginKeyWords}
-					setModalVisible={setModalVisible}
-				/> */}
 
 				<RegistrationConfirmationModal
 					loginKeyWords={loginKeyWords}
