@@ -7,8 +7,11 @@ import { toMnemonic } from "./pwa-mnemonic";
 import { logError } from "./pwa-utils";
 
 import type { Dispatch, SetStateAction } from "react";
-import type { LoginSession } from "@/context/LoginSessionContext";
 import type { Profile } from "@/context/CurrentProfileContext";
+import type {
+	LoginSession,
+	UnpackedLoginSession,
+} from "@/context/LoginSessionContext";
 
 export async function register(
 	profileName: string,
