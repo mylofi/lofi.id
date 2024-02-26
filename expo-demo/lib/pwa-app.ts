@@ -53,6 +53,19 @@ async function saveLoginSession(session: LoginSession) {
 	// );
 }
 
+async function saveProfile(profileName, profileInfo) {
+	if (loginSession) {
+		currentProfile = profileInfo;
+		let profiles = readStoredProfiles();
+		profiles[profileName] = await encryptText(
+			JSON.stringify(currentProfile),
+			loginSession.encPK
+		);
+		window.localStorage.setItem("profiles", JSON.stringify(profiles));
+		return true;
+	}
+}
+
 function packKeyInfo(keyInfo) {
 	return Object.assign(
 		{ ...keyInfo },
