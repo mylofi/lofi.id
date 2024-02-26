@@ -96,15 +96,12 @@ async function saveProfile(
 	}
 }
 
-export async function getProfile(
-	profileName: string,
-	loginSession: LoginSession
-) {
+export async function getProfile(loginSession: UnpackedLoginSession) {
 	let profiles = await readStoredProfiles();
-	if (profiles[profileName] && loginSession) {
+	if (profiles[loginSession.profileName] && loginSession) {
 		try {
 			let json = await decryptText(
-				profiles[profileName],
+				profiles[loginSession.profileName],
 				loginSession.encPK,
 				loginSession.encSK
 			);
