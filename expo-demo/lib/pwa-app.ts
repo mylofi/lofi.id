@@ -75,7 +75,7 @@ export async function clearLoginSession(
 async function saveProfile(
 	profileName: string,
 	profileInfo: Profile,
-	loginSession: LoginSession,
+	loginSession: UnpackedLoginSession,
 	setCurrentProfile: Dispatch<SetStateAction<Profile | null>>
 ) {
 	if (loginSession) {
@@ -124,7 +124,7 @@ export async function readStoredProfiles() {
 	return JSON.parse((await AsyncStorage.getItem("profiles")) || "null") || {};
 }
 
-function packKeyInfo(keyInfo) {
+function packKeyInfo(keyInfo: UnpackedLoginSession): LoginSession {
 	return Object.assign(
 		{ ...keyInfo },
 		Object.fromEntries(
@@ -146,7 +146,7 @@ function packKeyInfo(keyInfo) {
 	);
 }
 
-export function unpackKeyInfo(keyInfo) {
+export function unpackKeyInfo(keyInfo: LoginSession) {
 	return Object.assign(
 		{ ...keyInfo },
 		Object.fromEntries(
