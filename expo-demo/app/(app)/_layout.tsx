@@ -10,6 +10,7 @@ import { CurrentProfileContext } from "@/context/CurrentProfileContext";
 import { LoginSessionContext } from "@/context/LoginSessionContext";
 
 export default function AppLayout() {
+	const { setCurrentProfile } = useContext(CurrentProfileContext);
 	const { loginSession, setLoginSession } = useContext(LoginSessionContext);
 	const [loading, setLoading] = useState(true);
 
