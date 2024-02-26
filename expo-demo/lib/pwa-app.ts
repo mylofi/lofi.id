@@ -24,7 +24,7 @@ export async function register(
 		profileName,
 		...keyInfo,
 	};
-	await saveLoginSession(loginSession);
+	await saveLoginSession(loginSession, setLoginSession);
 
 	// if (await saveProfile(profileName, registrationInfo)) {
 	// 	currentProfile = registrationInfo;
@@ -55,6 +55,18 @@ async function saveLoginSession(
 		// TODO: handle error
 	}
 }
+
+async function clearLoginSession(
+	setLoginSession: Dispatch<SetStateAction<LoginSession | null>>,
+	setCurrentProfile: Dispatch<SetStateAction<Profile | null>>
+) {
+	try {
+		await AsyncStorage.removeItem("login-session");
+	} catch (e) {
+		// TODO: handle error
+	}
+	setLoginSession(null);
+	setCurrentProfile(null);
 }
 
 async function saveProfile(
