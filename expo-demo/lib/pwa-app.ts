@@ -16,7 +16,7 @@ export async function register(
 	setLoginSession: Dispatch<SetStateAction<LoginSession | null>>,
 	setCurrentProfile: Dispatch<SetStateAction<Profile | null>>
 ) {
-	var keyInfo = await generateAsymmetricKey();
+	const keyInfo = generateAsymmetricKey();
 	const loginSession = {
 		profileName,
 		...keyInfo,
