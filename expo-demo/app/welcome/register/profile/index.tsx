@@ -88,6 +88,7 @@ export default function Profile() {
 			throw new Error(
 				"Profile registration not saved. Please try again."
 			);
+			// TODO: redirect to welcome screen
 		}
 
 		setLoginKeyWords(loginKeyWords);
