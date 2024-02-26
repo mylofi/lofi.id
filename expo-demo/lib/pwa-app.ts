@@ -5,7 +5,9 @@ import { encryptText } from "./pwa-data";
 import { generateAsymmetricKey } from "./pwa-keys";
 import { toMnemonic } from "./pwa-mnemonic";
 
+import type { Dispatch, SetStateAction } from "react";
 import type { LoginSession } from "@/context/LoginSessionContext";
+import type { Profile } from "@/context/CurrentProfileContext";
 
 export async function readStoredProfiles() {
 	return JSON.parse((await AsyncStorage.getItem("profiles")) || "null") || {};
@@ -13,7 +15,9 @@ export async function readStoredProfiles() {
 
 export async function register(
 	profileName: string,
-	registrationInfo: { firstName: string; lastName: string; email: string }
+	registrationInfo: Profile,
+	setLoginSession: Dispatch<SetStateAction<LoginSession | null>>,
+	setCurrentProfile: Dispatch<SetStateAction<Profile | null>>
 ) {
 	var keyInfo = await generateAsymmetricKey();
 	const loginSession = {
