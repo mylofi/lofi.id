@@ -1,5 +1,8 @@
 import sodium from "react-native-libsodium";
+
 import { generateEntropy } from "./pwa-utils";
+
+import type { keyInfo } from "@/context/LoginSessionContext";
 
 export {
 	generateAsymmetricKey,
@@ -8,7 +11,7 @@ export {
 
 // *************************
 
-function generateAsymmetricKey(iv = generateEntropy(32)) {
+function generateAsymmetricKey(iv: Uint8Array = generateEntropy(32)): keyInfo {
 	try {
 		let ed25519KeyPair = sodium.crypto_sign_seed_keypair(iv);
 		return {
