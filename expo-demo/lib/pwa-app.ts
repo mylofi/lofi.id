@@ -62,7 +62,7 @@ async function saveLoginSession(
 	}
 }
 
-async function clearLoginSession(
+export async function clearLoginSession(
 	setLoginSession: Dispatch<SetStateAction<LoginSession | null>>,
 	setCurrentProfile: Dispatch<SetStateAction<Profile | null>>
 ) {
