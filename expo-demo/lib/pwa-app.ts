@@ -99,7 +99,10 @@ async function saveProfile(
 	}
 }
 
-async function getProfile(profileName) {
+export async function getProfile(
+	profileName: string,
+	loginSession: LoginSession
+) {
 	let profiles = readStoredProfiles();
 	if (profiles[profileName] && loginSession) {
 		try {
