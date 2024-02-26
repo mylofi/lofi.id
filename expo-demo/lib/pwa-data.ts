@@ -1,3 +1,4 @@
+import "fast-text-encoding"; // Pollyfill for TextEncoder and TextDecoder
 import sodium from "react-native-libsodium";
 
 export async function encryptText(text, pkBuffer) {
