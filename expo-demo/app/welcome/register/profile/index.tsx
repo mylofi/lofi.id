@@ -82,6 +82,14 @@ export default function Profile() {
 			setLoginSession,
 			setCurrentProfile
 		);
+
+		if (!loginKeyWords) {
+			// TODO: Show user-friendly error message.
+			throw new Error(
+				"Profile registration not saved. Please try again."
+			);
+		}
+
 		setLoginKeyWords(loginKeyWords);
 		setModalVisible(true);
 	}
