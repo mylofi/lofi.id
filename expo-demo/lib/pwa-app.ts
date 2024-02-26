@@ -57,15 +57,26 @@ async function saveLoginSession(
 }
 }
 
-async function saveProfile(profileName, profileInfo) {
+async function saveProfile(
+	profileName: string,
+	profileInfo: Profile,
+	loginSession: LoginSession,
+	setCurrentProfile: Dispatch<SetStateAction<Profile | null>>
+) {
 	if (loginSession) {
-		currentProfile = profileInfo;
+		const currentProfile = profileInfo;
+		setCurrentProfile(currentProfile);
+
 		let profiles = readStoredProfiles();
 		profiles[profileName] = await encryptText(
 			JSON.stringify(currentProfile),
 			loginSession.encPK
 		);
-		window.localStorage.setItem("profiles", JSON.stringify(profiles));
+		try {
+			await AsyncStorage.setItem("profiles", JSON.stringify(profiles));
+		} catch (e) {
+			// TODO: handle error
+		}
 		return true;
 	}
 }
