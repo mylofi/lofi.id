@@ -41,20 +41,20 @@ export async function register(
 	return showProfile();
 }
 
-async function saveLoginSession(session: LoginSession) {
-	// loginSession = session;
+async function saveLoginSession(
+	session: LoginSession,
+	setLoginSession: Dispatch<SetStateAction<LoginSession | null>>
+) {
+	setLoginSession(session);
 	try {
 		await AsyncStorage.setItem(
 			"login-session",
 			JSON.stringify(packKeyInfo(session))
 		);
 	} catch (e) {
-		// saving error
+		// TODO: handle error
 	}
-	// window.sessionStorage.setItem(
-	// 	"login-session",
-	// 	JSON.stringify(packKeyInfo(session))
-	// );
+}
 }
 
 async function saveProfile(profileName, profileInfo) {
