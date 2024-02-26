@@ -17,10 +17,12 @@ import {
 import { ProfileNameContext } from "@/context/ProfileNameContext";
 
 import Layout from "@/components/Layout";
-import PWAWebView from "@/components/PWAWebView";
+// import PWAWebView from "@/components/PWAWebView";
 import RegistrationConfirmationModal from "@/components/RegistrationConfirmationModal";
+import { generateAsymmetricKey } from "@/lib/pwa-keys";
 
 import type { WebView } from "react-native-webview";
+import { register } from "@/lib/pwa-app";
 
 export default function Profile() {
 	const { profileName, setProfileName } = useContext(ProfileNameContext);
@@ -40,7 +42,7 @@ export default function Profile() {
 
 	// TODO: handle loading states
 
-	function handleSubmit() {
+	async function handleSubmit() {
 		const sanitizedFirstName = firstName.trim();
 		const sanitizedLastName = lastName.trim();
 		const sanitizedEmail = email.trim().toLowerCase();
@@ -69,19 +71,27 @@ export default function Profile() {
 			return;
 		}
 
-		const message = {
-			type: "register",
-			payload: {
-				profileName,
-				registrationInfo: {
-					firstName: sanitizedFirstName,
-					lastName: sanitizedLastName,
-					email: sanitizedEmail,
-				},
-			},
-		};
+		const { loginSession, loginKeyWords } = await register(profileName, {
+			firstName: sanitizedFirstName,
+			lastName: sanitizedLastName,
+			email: sanitizedEmail,
+		});
+		console.log("loginKeyWords:", loginKeyWords);
+		console.log("loginSession:", loginSession);
 
-		webViewRef.current?.postMessage(JSON.stringify(message));
+		// const message = {
+		// 	type: "register",
+		// 	payload: {
+		// 		profileName,
+		// 		registrationInfo: {
+		// 			firstName: sanitizedFirstName,
+		// 			lastName: sanitizedLastName,
+		// 			email: sanitizedEmail,
+		// 		},
+		// 	},
+		// };
+
+		// webViewRef.current?.postMessage(JSON.stringify(message));
 	}
 
 	return (
@@ -188,11 +198,11 @@ export default function Profile() {
 					</VStack>
 				</VStack>
 
-				<PWAWebView
+				{/* <PWAWebView
 					ref={webViewRef}
 					setLoginKeyWords={setLoginKeyWords}
 					setModalVisible={setModalVisible}
-				/>
+				/> */}
 
 				<RegistrationConfirmationModal
 					loginKeyWords={loginKeyWords}

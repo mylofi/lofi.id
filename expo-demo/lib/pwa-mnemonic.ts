@@ -14,11 +14,12 @@
 //   https://github.com/tc39/proposal-import-attributes
 //   https://caniuse.com/?search=import%20attributes
 
-// import bip39Words from "./external/bip39-english.json" with { type: "json" };
+import bip39Words from "./bip39-english.json"; // with { type: "json" };
+import sodium from "react-native-libsodium";
 
-var bip39Words = await fetch(
-	`${import.meta.url.match(/^(.*)\/[^\/]+$/)[1]}/external/bip39-english.json`
-).then((res) => res.json());
+// var bip39Words = await fetch(
+// 	`${import.meta.url.match(/^(.*)\/[^\/]+$/)[1]}/external/bip39-english.json`
+// ).then((res) => res.json());
 
 export { toMnemonic, fromMnemonic };
 
@@ -102,6 +103,7 @@ async function fromMnemonic(words) {
 }
 
 function computeChecksum(bits) {
+	console.log("sodium.crypto_hash:", sodium.crypto_hash);
 	var hash = sodium.crypto_hash(bits).buffer;
 	return new DataView(hash).getUint8(0) >>> (8 - bits.length / 4);
 }

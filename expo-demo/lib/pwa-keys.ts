@@ -1,4 +1,5 @@
-import { generateEntropy } from "./util.js";
+import sodium from "react-native-libsodium";
+import { generateEntropy } from "./pwa-utils";
 
 export {
 	generateAsymmetricKey,
