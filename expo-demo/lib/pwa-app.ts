@@ -9,10 +9,6 @@ import type { Dispatch, SetStateAction } from "react";
 import type { LoginSession } from "@/context/LoginSessionContext";
 import type { Profile } from "@/context/CurrentProfileContext";
 
-export async function readStoredProfiles() {
-	return JSON.parse((await AsyncStorage.getItem("profiles")) || "null") || {};
-}
-
 export async function register(
 	profileName: string,
 	registrationInfo: Profile,
@@ -85,7 +81,7 @@ async function saveProfile(
 		const currentProfile = profileInfo;
 		setCurrentProfile(currentProfile);
 
-		let profiles = readStoredProfiles();
+		let profiles = await readStoredProfiles();
 		profiles[profileName] = await encryptText(
 			JSON.stringify(currentProfile),
 			loginSession.encPK
@@ -103,7 +99,7 @@ export async function getProfile(
 	profileName: string,
 	loginSession: LoginSession
 ) {
-	let profiles = readStoredProfiles();
+	let profiles = await readStoredProfiles();
 	if (profiles[profileName] && loginSession) {
 		try {
 			let json = await decryptText(
@@ -121,6 +117,10 @@ export async function getProfile(
 		}
 	}
 	return null;
+}
+
+export async function readStoredProfiles() {
+	return JSON.parse((await AsyncStorage.getItem("profiles")) || "null") || {};
 }
 
 function packKeyInfo(keyInfo) {
