@@ -16,8 +16,33 @@ export default function AppLayout() {
 
 	// TODO: Add logic to check if user is already logged in on app start here.
 	useEffect(() => {
-		setLoading(false);
-	}, [loginSession, setLoginSession]);
+		(async () => {
+			const session =
+				loginSession ||
+				JSON.parse(
+					(await AsyncStorage.getItem("login-session")) || "null"
+				);
+
+			if (session) {
+				const profile = await getProfile(
+					// TODO: Fix type error.
+					unpackKeyInfo({
+						...session,
+						profileName: sanitize(session.profileName),
+					})
+				);
+				if (profile) {
+					setCurrentProfile(profile);
+					setLoginSession(session);
+					setLoading(false);
+					return;
+				}
+			}
+
+			clearLoginSession(setLoginSession, setCurrentProfile);
+			setLoading(false);
+		})();
+	}, [loginSession]);
 
 	// You can keep the splash screen open, or render a loading screen like we do here.
 	if (loading) {
