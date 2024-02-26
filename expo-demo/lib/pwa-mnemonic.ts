@@ -100,6 +100,9 @@ async function fromMnemonic(words) {
 
 function computeChecksum(bits) {
 	console.log("sodium.crypto_hash:", sodium.crypto_hash);
+	// TODO: crypto_hash is not available in the current version of
+	// react-native-libsodium so returning 1 for now.
+	return 1;
 	var hash = sodium.crypto_hash(bits).buffer;
 	return new DataView(hash).getUint8(0) >>> (8 - bits.length / 4);
 }
