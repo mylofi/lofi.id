@@ -45,7 +45,7 @@ export async function register(
 }
 
 async function saveLoginSession(
-	session: LoginSession,
+	session: UnpackedLoginSession,
 	setLoginSession: Dispatch<SetStateAction<LoginSession | null>>
 ) {
 	setLoginSession(packKeyInfo(session));
