@@ -99,6 +99,27 @@ async function saveProfile(
 	}
 }
 
+async function getProfile(profileName) {
+	let profiles = readStoredProfiles();
+	if (profiles[profileName] && loginSession) {
+		try {
+			let json = await decryptText(
+				profiles[profileName],
+				loginSession.encPK,
+				loginSession.encSK
+			);
+			let profile = JSON.parse(json);
+			if (!(profile != null && "firstName" in profile)) {
+				throw new Error("Profile not opened.");
+			}
+			return profile;
+		} catch (err) {
+			logError(err);
+		}
+	}
+	return null;
+}
+
 function packKeyInfo(keyInfo) {
 	return Object.assign(
 		{ ...keyInfo },
