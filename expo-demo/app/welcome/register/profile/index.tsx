@@ -16,12 +16,16 @@ import {
 
 import { register } from "@/lib/pwa-app";
 
+import { CurrentProfileContext } from "@/context/CurrentProfileContext";
+import { LoginSessionContext } from "@/context/LoginSessionContext";
 import { ProfileNameContext } from "@/context/ProfileNameContext";
 
 import Layout from "@/components/Layout";
 import RegistrationConfirmationModal from "@/components/RegistrationConfirmationModal";
 
 export default function Profile() {
+	const { setCurrentProfile } = useContext(CurrentProfileContext);
+	const { setLoginSession } = useContext(LoginSessionContext);
 	const { profileName, setProfileName } = useContext(ProfileNameContext);
 
 	const [firstName, setFirstName] = useState("");
@@ -66,13 +70,20 @@ export default function Profile() {
 			return;
 		}
 
-		const { loginSession, loginKeyWords } = await register(profileName, {
+		const registrationInfo = {
 			firstName: sanitizedFirstName,
 			lastName: sanitizedLastName,
 			email: sanitizedEmail,
-		});
-		console.log("loginSession:", loginSession);
-		console.log("loginKeyWords:", loginKeyWords);
+		};
+
+		const loginKeyWords = await register(
+			profileName,
+			registrationInfo,
+			setLoginSession,
+			setCurrentProfile
+		);
+		setLoginKeyWords(loginKeyWords);
+		setModalVisible(true);
 	}
 
 	return (
