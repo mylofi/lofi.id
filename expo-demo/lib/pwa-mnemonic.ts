@@ -14,12 +14,8 @@
 //   https://github.com/tc39/proposal-import-attributes
 //   https://caniuse.com/?search=import%20attributes
 
-import bip39Words from "./bip39-english.json"; // with { type: "json" };
 import sodium from "react-native-libsodium";
-
-// var bip39Words = await fetch(
-// 	`${import.meta.url.match(/^(.*)\/[^\/]+$/)[1]}/external/bip39-english.json`
-// ).then((res) => res.json());
+import bip39Words from "./bip39-english.json"; // with { type: "json" };
 
 export { toMnemonic, fromMnemonic };
 
