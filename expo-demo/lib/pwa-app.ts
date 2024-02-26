@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import sodium from "react-native-libsodium";
 
-import { encryptText } from "./pwa-data";
+import { decryptText, encryptText } from "./pwa-data";
 import { generateAsymmetricKey } from "./pwa-keys";
 import { toMnemonic } from "./pwa-mnemonic";
 
