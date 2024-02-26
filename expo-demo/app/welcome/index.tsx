@@ -14,7 +14,7 @@ export default function Welcome() {
 
 					<VStack space="sm" m="$3">
 						<Button
-						// onPress={() => router.navigate("/welcome/login")}
+							onPress={() => router.navigate("/welcome/login")}
 						>
 							<ButtonText>Login</ButtonText>
 						</Button>
