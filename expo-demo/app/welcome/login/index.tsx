@@ -49,11 +49,11 @@ export default function Login() {
 
 	return (
 		<>
-			<Stack.Screen options={{ headerTitle: "Register" }} />
+			<Stack.Screen options={{ headerTitle: "Login" }} />
 			<Layout>
 				<VStack space="md">
 					<Heading color="$white" size="2xl">
-						Profile Name
+						Login
 					</Heading>
 
 					<FormControl isInvalid={profileNameError !== ""}>
@@ -85,7 +85,7 @@ export default function Login() {
 
 					<VStack space="sm">
 						<Button onPress={() => handleCreateProfileName()}>
-							<ButtonText>Create</ButtonText>
+							<ButtonText>Submit</ButtonText>
 						</Button>
 
 						<Button
