@@ -26,19 +26,25 @@ export async function register(
 	};
 	await saveLoginSession(loginSession, setLoginSession);
 
-	// if (await saveProfile(profileName, registrationInfo)) {
-	// 	currentProfile = registrationInfo;
-	// } else {
-	// 	clearLoginSession();
-	// 	await showError("Profile registration not saved. Please try again.");
-	// 	return promptWelcome();
-	// }
+	if (
+		await saveProfile(
+			profileName,
+			registrationInfo,
+			loginSession,
+			setCurrentProfile
+		)
+	) {
+		setCurrentProfile(registrationInfo);
+	} else {
+		clearLoginSession(setLoginSession, setCurrentProfile);
+		return "";
+	}
 
-	var loginKeyWords = (await toMnemonic(keyInfo.iv)).join(" ");
-	// await confirmRegistration(profileName,loginKeyWords);
+	// TODO: use real login keywords once crypto_hash is implemented
+	// var loginKeyWords = (await toMnemonic(keyInfo.iv)).join(" ");
+	const loginKeyWords = "loginKeyWords";
 
-	return { loginSession, loginKeyWords };
-	return showProfile();
+	return loginKeyWords;
 }
 
 async function saveLoginSession(
