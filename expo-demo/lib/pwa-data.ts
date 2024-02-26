@@ -8,8 +8,6 @@ export async function encryptText(text, pkBuffer) {
 	} catch (err) {
 		throw new Error("Text encryption failed.", { cause: err });
 	}
-
-	throw new Error("Text encryption failed.");
 }
 
 export async function decryptText(encText, pkBuffer, skBuffer) {
@@ -27,6 +25,4 @@ export async function decryptText(encText, pkBuffer, skBuffer) {
 	} catch (err) {
 		throw new Error("Text decryption failed.", { cause: err });
 	}
-
-	throw new Error("Text decryption failed.");
 }
