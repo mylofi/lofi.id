@@ -12,8 +12,10 @@ import { config } from "@gluestack-ui/config";
 import { useColorScheme } from "@/components/useColorScheme";
 import { Slot } from "expo-router";
 
+import { CurrentProfileContext } from "@/context/CurrentProfileContext";
 import { LoginSessionContext } from "@/context/LoginSessionContext";
 
+import type { Profile } from "@/context/CurrentProfileContext";
 import type { LoginSession } from "@/context/LoginSessionContext";
 
 export {
@@ -55,6 +57,7 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
 	const colorScheme = useColorScheme();
+	const [currentProfile, setCurrentProfile] = useState<Profile | null>(null);
 	const [loginSession, setLoginSession] = useState<LoginSession | null>(null);
 
 	return (
@@ -65,7 +68,11 @@ function RootLayoutNav() {
 				<LoginSessionContext.Provider
 					value={{ loginSession, setLoginSession }}
 				>
-					<Slot />
+					<CurrentProfileContext.Provider
+						value={{ currentProfile, setCurrentProfile }}
+					>
+						<Slot />
+					</CurrentProfileContext.Provider>
 				</LoginSessionContext.Provider>
 			</ThemeProvider>
 		</GluestackUIProvider>
