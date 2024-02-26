@@ -37,10 +37,7 @@ export async function register(
 		return "";
 	}
 
-	// TODO: use real login keywords once crypto_hash is implemented
-	// var loginKeyWords = (await toMnemonic(keyInfo.iv)).join(" ");
-	const loginKeyWords = "loginKeyWords";
-
+	const loginKeyWords = (await toMnemonic(keyInfo.iv)).join(" ");
 	return loginKeyWords;
 }
 
