@@ -4,6 +4,7 @@ import sodium from "react-native-libsodium";
 import { decryptText, encryptText } from "./pwa-data";
 import { generateAsymmetricKey } from "./pwa-keys";
 import { toMnemonic } from "./pwa-mnemonic";
+import { logError } from "./pwa-utils";
 
 import type { Dispatch, SetStateAction } from "react";
 import type { LoginSession } from "@/context/LoginSessionContext";
