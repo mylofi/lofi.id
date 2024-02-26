@@ -96,7 +96,9 @@ async function saveProfile(
 	}
 }
 
-export async function getProfile(loginSession: UnpackedLoginSession) {
+export async function getProfile(
+	loginSession: UnpackedLoginSession
+): Promise<Profile | null> {
 	let profiles = await readStoredProfiles();
 	if (profiles[loginSession.profileName] && loginSession) {
 		try {
