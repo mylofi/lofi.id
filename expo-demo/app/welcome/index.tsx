@@ -26,7 +26,9 @@ export default function Welcome() {
 						</Button>
 
 						<Button
-						// onPress={() => router.navigate("/welcome/receive-sync")}
+							onPress={() =>
+								router.navigate("/welcome/receive-sync")
+							}
 						>
 							<ButtonText>Receive Sync</ButtonText>
 						</Button>
