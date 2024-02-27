@@ -44,7 +44,7 @@ export async function register(
 	return loginKeyWords;
 }
 
-async function saveLoginSession(
+export async function saveLoginSession(
 	session: UnpackedLoginSession,
 	setLoginSession: Dispatch<SetStateAction<LoginSession | null>>
 ) {
@@ -123,7 +123,7 @@ export async function readStoredProfiles() {
 	return JSON.parse((await AsyncStorage.getItem("profiles")) || "null") || {};
 }
 
-function packKeyInfo(keyInfo: UnpackedLoginSession): LoginSession {
+export function packKeyInfo(keyInfo: UnpackedLoginSession): LoginSession {
 	return Object.assign(
 		{ ...keyInfo },
 		Object.fromEntries(
