@@ -10,6 +10,7 @@ import {
 	CheckboxIndicator,
 	CheckboxLabel,
 	Heading,
+	Text,
 	VStack,
 } from "@gluestack-ui/themed";
 
@@ -18,13 +19,14 @@ import Layout from "@/components/Layout";
 export default function ProvideSync() {
 	const qrCodeRef = useRef<QRCode>(null);
 	const [includeFullProfile, setIncludeFullProfile] = useState(true);
+	const [frameCount, setFrameCount] = useState(0);
 	const [qrCodeValue, setQrCodeValue] = useState<string>();
 
 	return (
 		<>
 			<Stack.Screen options={{ headerTitle: "Provide Sync" }} />
 			<Layout>
-				<VStack space="4xl">
+				<VStack space="lg">
 					<Heading color="$white" size="2xl">
 						Provide Sync
 					</Heading>
@@ -38,6 +40,10 @@ export default function ProvideSync() {
 							Include full profile
 						</CheckboxLabel>
 					</Checkbox>
+
+					<Text size="lg" color="$white">
+						Frame: {frameCount}
+					</Text>
 
 					<Center bg="$white" h={350} borderRadius="$md">
 						<QRCode
