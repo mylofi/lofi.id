@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Stack, router } from "expo-router";
 import QRCode from "react-native-qrcode-svg";
 import {
@@ -24,6 +24,8 @@ export default function ProvideSync() {
 	const [frameIndex, setFrameIndex] = useState(0);
 	const [frameCount, setFrameCount] = useState(0);
 	const [qrCodeValue, setQrCodeValue] = useState<string>();
+
+	useEffect(() => {}, []);
 
 	return (
 		<>
