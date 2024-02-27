@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useContext, useState } from "react";
 import { Stack, router } from "expo-router";
 import QRCode from "react-native-qrcode-svg";
 import {
@@ -14,10 +14,12 @@ import {
 	VStack,
 } from "@gluestack-ui/themed";
 
+import { LoginSessionContext } from "@/context/LoginSessionContext";
+
 import Layout from "@/components/Layout";
 
 export default function ProvideSync() {
-	const qrCodeRef = useRef<QRCode>(null);
+	const { loginSession } = useContext(LoginSessionContext);
 	const [includeFullProfile, setIncludeFullProfile] = useState(true);
 	const [frameIndex, setFrameIndex] = useState(0);
 	const [frameCount, setFrameCount] = useState(0);
@@ -32,7 +34,12 @@ export default function ProvideSync() {
 						Provide Sync
 					</Heading>
 
-					<Checkbox isChecked={includeFullProfile} value="" size="lg">
+					<Checkbox
+						aria-label="Include full profile"
+						isChecked={includeFullProfile}
+						value=""
+						size="lg"
+					>
 						<CheckboxIndicator mr="$2">
 							{/* <CheckboxIcon as={CheckIcon}/> */}
 						</CheckboxIndicator>
@@ -48,7 +55,6 @@ export default function ProvideSync() {
 
 					<Center bg="$white" h={350} borderRadius="$md">
 						<QRCode
-							ref={qrCodeRef}
 							value={qrCodeValue}
 							size={300}
 							logo={{
