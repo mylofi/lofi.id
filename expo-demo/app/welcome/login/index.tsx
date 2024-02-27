@@ -42,23 +42,51 @@ export default function Login() {
 	const [loginProfileName, setLoginProfileName] = useState("");
 	const [loginKeyWords, setLoginKeyWords] = useState("");
 
-		if (sanitizedProfileName === "" || sanitizedProfileName.length > 30) {
-			setProfileNameError("Please enter a value from 1-30 characters.");
+	async function handleCreateProfileName() {
+		const sanitizedLoginKeyWords = loginKeyWords.trim().toLowerCase();
+
+		if (!loginProfileName || !(loginProfileName in profiles)) {
+			Alert.alert("Please select a valid profile for login.");
 			return;
 		}
 
-		// TODO: readStoredProfiles is not fully implemented, so the check for
-		// existing profiles is not working yet.
-		const profiles = readStoredProfiles();
-		if (sanitizedProfileName in profiles) {
-			setProfileNameError(
-				`Profile '${sanitizedProfileName}' is already registered on this device.`
+		if (!/^(?:\w+ ){23}\w+$/.test(sanitizedLoginKeyWords)) {
+			Alert.alert(
+				"Login ID must be exactly 24 words, separated by spaces."
 			);
 			return;
 		}
 
-		setProfileName(sanitizedProfileName);
-		router.navigate("/welcome/register/profile");
+		const [decodedIV, checksumValid] = await fromMnemonic(loginKeyWords);
+
+		if (!checksumValid) {
+			Alert.alert("Login ID is invalid.");
+			return;
+		}
+
+		try {
+			let keyInfo = generateAsymmetricKey(decodedIV);
+			const session = {
+				profileName: loginProfileName,
+				...keyInfo,
+			};
+
+			saveLoginSession(session, setLoginSession);
+
+			const profile = await getProfile(session);
+			if (profile) {
+				setCurrentProfile(profile);
+				setLoginSession(packKeyInfo(session));
+				router.navigate("/");
+				return;
+			}
+
+			clearLoginSession(setLoginSession, setCurrentProfile);
+			Alert.alert("Login Failed.");
+		} catch (err) {
+			clearLoginSession(setLoginSession, setCurrentProfile);
+			Alert.alert("Login ID could not be processed.");
+		}
 	}
 
 	useEffect(() => {
