@@ -56,33 +56,6 @@ export default function Login() {
 						Login
 					</Heading>
 
-					<FormControl isInvalid={profileNameError !== ""}>
-						<FormControlLabel>
-							<FormControlLabelText color="$white">
-								Please enter a profile name (username).
-							</FormControlLabelText>
-						</FormControlLabel>
-
-						<Input>
-							<InputField
-								onChangeText={(text) => {
-									setProfileNameError("");
-									setProfileName(text);
-								}}
-								value={profileName}
-								autoCapitalize="none"
-								maxLength={30}
-								color="$white"
-							/>
-						</Input>
-
-						<FormControlError>
-							<FormControlErrorText>
-								{profileNameError}
-							</FormControlErrorText>
-						</FormControlError>
-					</FormControl>
-
 					<Select>
 						<SelectTrigger>
 							<SelectInput placeholder="Select a profile" />
