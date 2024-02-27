@@ -91,6 +91,7 @@ export default function Profile() {
 			// TODO: redirect to welcome screen
 		}
 
+		console.log("loginKeyWords:", loginKeyWords);
 		setLoginKeyWords(loginKeyWords);
 		setModalVisible(true);
 	}
