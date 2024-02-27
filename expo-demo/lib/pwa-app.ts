@@ -45,11 +45,6 @@ export async function register(
 }
 
 async function onSyncProvide() {
-	var includeProfileEl;
-	var qrCodeHolderEl;
-	var frameIndexEl;
-	var frameCountEl;
-	var qrCodeHolderDim;
 	var qrCodeImgEl;
 	var qrCodeCnvEl;
 	var whichActiveElem = null;
@@ -63,15 +58,6 @@ async function onSyncProvide() {
 
 	await Swal.fire({
 		didOpen(popupEl) {
-			includeProfileEl = document.getElementById(
-				"include-profile-in-sync"
-			);
-			qrCodeHolderEl = document.getElementById("sync-qr-code");
-			frameIndexEl = document.getElementById("qr-frame-index");
-			frameCountEl = document.getElementById("qr-frame-count");
-
-			qrCodeHolderDim = qrCodeHolderEl.getBoundingClientRect();
-
 			includeProfileEl.addEventListener("change", generateFrames, false);
 			generateFrames();
 		},
