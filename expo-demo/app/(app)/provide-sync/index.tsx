@@ -19,6 +19,7 @@ import Layout from "@/components/Layout";
 export default function ProvideSync() {
 	const qrCodeRef = useRef<QRCode>(null);
 	const [includeFullProfile, setIncludeFullProfile] = useState(true);
+	const [frameIndex, setFrameIndex] = useState(0);
 	const [frameCount, setFrameCount] = useState(0);
 	const [qrCodeValue, setQrCodeValue] = useState<string>();
 
@@ -42,7 +43,7 @@ export default function ProvideSync() {
 					</Checkbox>
 
 					<Text size="lg" color="$white">
-						Frame: {frameCount}
+						Frame: {frameIndex} / {frameCount}
 					</Text>
 
 					<Center bg="$white" h={350} borderRadius="$md">
