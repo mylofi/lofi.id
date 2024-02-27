@@ -67,9 +67,15 @@ export default function Login() {
 						Login
 					</Heading>
 
-					<Select>
+					<Select
+						selectedValue={loginProfileName}
+						onValueChange={(value) => setLoginProfileName(value)}
+					>
 						<SelectTrigger>
-							<SelectInput placeholder="Select a profile" />
+							<SelectInput
+								color="$white"
+								placeholder="Select a profile"
+							/>
 							{/* <SelectIcon mr="$3">
                                 <Icon as={ChevronDownIcon} />
                             </SelectIcon> */}
