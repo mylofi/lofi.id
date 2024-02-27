@@ -47,6 +47,11 @@ export default function Login() {
 		router.navigate("/welcome/register/profile");
 	}
 
+	useEffect(() => {
+		(async () => {
+		})();
+	}, []);
+
 	return (
 		<>
 			<Stack.Screen options={{ headerTitle: "Login" }} />
