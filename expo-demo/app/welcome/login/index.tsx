@@ -30,7 +30,6 @@ import { fromMnemonic } from "@/lib/pwa-mnemonic";
 
 import { CurrentProfileContext } from "@/context/CurrentProfileContext";
 import { LoginSessionContext } from "@/context/LoginSessionContext";
-import { ProfileNameContext } from "@/context/ProfileNameContext";
 
 import Layout from "@/components/Layout";
 
@@ -129,7 +128,6 @@ export default function Login() {
 
 						<Button
 							onPress={() => {
-								setProfileName("");
 								router.navigate("/welcome");
 							}}
 						>
