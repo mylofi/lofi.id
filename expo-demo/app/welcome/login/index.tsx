@@ -38,8 +38,9 @@ export default function Login() {
 	const { setCurrentProfile } = useContext(CurrentProfileContext);
 	const { setLoginSession } = useContext(LoginSessionContext);
 
-	function handleCreateProfileName() {
-		const sanitizedProfileName = sanitize(profileName);
+	const [profiles, setProfiles] = useState({});
+	const [loginProfileName, setLoginProfileName] = useState("");
+	const [loginKeyWords, setLoginKeyWords] = useState("");
 
 		if (sanitizedProfileName === "" || sanitizedProfileName.length > 30) {
 			setProfileNameError("Please enter a value from 1-30 characters.");
