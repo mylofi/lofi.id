@@ -14,18 +14,25 @@ import {
 	VStack,
 } from "@gluestack-ui/themed";
 
+import { CurrentProfileContext } from "@/context/CurrentProfileContext";
 import { LoginSessionContext } from "@/context/LoginSessionContext";
 
 import Layout from "@/components/Layout";
 
 export default function ProvideSync() {
+	const { currentProfile } = useContext(CurrentProfileContext);
 	const { loginSession } = useContext(LoginSessionContext);
 	const [includeFullProfile, setIncludeFullProfile] = useState(true);
 	const [frameIndex, setFrameIndex] = useState(0);
 	const [frameCount, setFrameCount] = useState(0);
 	const [qrCodeValue, setQrCodeValue] = useState<string>();
 
-	useEffect(() => {}, []);
+	useEffect(() => {
+		const data = JSON.stringify({
+			credentials: loginSession,
+			...(includeFullProfile ? { profile: currentProfile } : {}),
+		});
+	}, []);
 
 	return (
 		<>
