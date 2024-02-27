@@ -31,9 +31,9 @@ export default function Welcome() {
 							<ButtonText>Receive Sync</ButtonText>
 						</Button>
 
-						<Button onPress={() => router.navigate("/welcome/pwa")}>
+						{/* <Button onPress={() => router.navigate("/welcome/pwa")}>
 							<ButtonText>PWA</ButtonText>
-						</Button>
+						</Button> */}
 					</VStack>
 				</VStack>
 			</Layout>
