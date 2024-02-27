@@ -14,7 +14,7 @@
 //   https://github.com/tc39/proposal-import-attributes
 //   https://caniuse.com/?search=import%20attributes
 
-import sodium from "react-native-libsodium";
+import { crypto_hash } from "react-native-libsodium";
 import bip39Words from "./bip39-english.json"; // with { type: "json" };
 
 export { toMnemonic, fromMnemonic };
@@ -99,10 +99,13 @@ async function fromMnemonic(words) {
 }
 
 function computeChecksum(bits) {
-	console.log("sodium.crypto_hash:", sodium.crypto_hash);
-	// TODO: crypto_hash is not available in the current version of
-	// react-native-libsodium so returning 1 for now.
-	return 1;
-	var hash = sodium.crypto_hash(bits).buffer;
-	return new DataView(hash).getUint8(0) >>> (8 - bits.length / 4);
+	console.log("sodium.crypto_hash:", crypto_hash); // not exposed under sodium.
+	const hashOutput = crypto_hash(bits); // This will return a Uint8Array by default.
+	// var hash = sodium.crypto_hash(bits).buffer;
+	// return new DataView(hash).getUint8(0) >>> (8 - bits.length / 4);
+
+	// a checksum from the first byte as before
+	const newChecksum = hashOutput[0] >>> (8 - bits.byteLength / 4);
+	console.log("New checksum - return val: ", newChecksum);
+	return newChecksum;
 }

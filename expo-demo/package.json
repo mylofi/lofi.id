@@ -38,7 +38,7 @@
     "react-dom": "18.2.0",
     "react-native": "0.73.2",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
-    "react-native-libsodium": "github:getify/react-native-libsodium",
+    "react-native-libsodium": "https://github.com/getify/react-native-libsodium",
     "react-native-reanimated": "^3.7.0",
     "react-native-safe-area-context": "4.8.2",
     "react-native-screens": "~3.29.0",
