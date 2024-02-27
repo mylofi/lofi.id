@@ -70,18 +70,6 @@ async function onSyncProvide() {
 				false
 			);
 			qrCodeImgEl.removeEventListener("load", onImgLoad, false);
-
-			includeProfileEl =
-				qrCodeHolderEl =
-				qrCodeImgEl =
-				qrCodeCnvEl =
-				intv =
-				qrImg =
-				frames =
-				frameCache =
-				imgLoadPr =
-				imgLoadTrigger =
-					null;
 		},
 	});
 
