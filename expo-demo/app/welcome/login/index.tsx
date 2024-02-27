@@ -20,6 +20,7 @@ import {
 } from "@gluestack-ui/themed";
 
 import {
+	clearLoginSession,
 	getProfile,
 	packKeyInfo,
 	readStoredProfiles,
