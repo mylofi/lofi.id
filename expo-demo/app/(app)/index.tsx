@@ -1,6 +1,12 @@
 import { useContext } from "react";
 import { Stack, router } from "expo-router";
-import { Button, ButtonText, Heading, VStack } from "@gluestack-ui/themed";
+import {
+	Button,
+	ButtonText,
+	Heading,
+	Text,
+	VStack,
+} from "@gluestack-ui/themed";
 
 import { clearLoginSession } from "@/lib/pwa-app";
 
@@ -9,8 +15,10 @@ import { LoginSessionContext } from "@/context/LoginSessionContext";
 import Layout from "@/components/Layout";
 
 export default function AppIndex() {
-	const { setCurrentProfile } = useContext(CurrentProfileContext);
-	const { setLoginSession } = useContext(LoginSessionContext);
+	const { currentProfile, setCurrentProfile } = useContext(
+		CurrentProfileContext
+	);
+	const { loginSession, setLoginSession } = useContext(LoginSessionContext);
 
 	return (
 		<>
@@ -20,6 +28,13 @@ export default function AppIndex() {
 					<Heading color="$white" size="2xl">
 						You are logged in
 					</Heading>
+
+					<VStack>
+						<Text color="$white">{loginSession?.profileName}</Text>
+						<Text color="$white">
+							{JSON.stringify(currentProfile)}
+						</Text>
+					</VStack>
 
 					<Button
 						size="md"
