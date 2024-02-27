@@ -5,6 +5,10 @@ import {
 	Button,
 	ButtonText,
 	Center,
+	Checkbox,
+	CheckboxIcon,
+	CheckboxIndicator,
+	CheckboxLabel,
 	Heading,
 	VStack,
 } from "@gluestack-ui/themed";
@@ -13,6 +17,7 @@ import Layout from "@/components/Layout";
 
 export default function ProvideSync() {
 	const qrCodeRef = useRef<QRCode>(null);
+	const [includeFullProfile, setIncludeFullProfile] = useState(true);
 	const [qrCodeValue, setQrCodeValue] = useState<string>();
 
 	return (
@@ -23,6 +28,16 @@ export default function ProvideSync() {
 					<Heading color="$white" size="2xl">
 						Provide Sync
 					</Heading>
+
+					<Checkbox isChecked={includeFullProfile} value="" size="lg">
+						<CheckboxIndicator mr="$2">
+							{/* <CheckboxIcon as={CheckIcon}/> */}
+						</CheckboxIndicator>
+
+						<CheckboxLabel color="$white">
+							Include full profile
+						</CheckboxLabel>
+					</Checkbox>
 
 					<Center bg="$white" h={350} borderRadius="$md">
 						<QRCode
