@@ -32,7 +32,40 @@ export default function ProvideSync() {
 			credentials: loginSession,
 			...(includeFullProfile ? { profile: currentProfile } : {}),
 		});
-	}, []);
+
+		// break the JSON string into 50-character chunks
+		let frames = data.split(/([^]{50})/).filter(Boolean);
+		const framesLen = frames.length;
+		setFrameCount(framesLen);
+		const frameLengthDigits = String(framesLen).length;
+
+		// prepare frame chunks list with index/frame-count headers
+		frames = frames.map(
+			(text, idx) =>
+				`${String(idx).padStart(
+					frameLengthDigits,
+					"0"
+				)}:${framesLen}:${text.padEnd(50, " ")}`
+		);
+		setQrCodeValue(frames[frameIndex]);
+
+		// Rotate to next frame after 250ms
+		const id = setTimeout(() => {
+			if (frameIndex >= frameCount) {
+				setFrameIndex(0);
+				return;
+			}
+			setFrameIndex(frameIndex + 1);
+		}, 250);
+
+		return () => clearTimeout(id);
+	}, [
+		currentProfile,
+		loginSession,
+		frameIndex,
+		frameCount,
+		includeFullProfile,
+	]);
 
 	return (
 		<>
@@ -48,6 +81,9 @@ export default function ProvideSync() {
 						isChecked={includeFullProfile}
 						value=""
 						size="lg"
+						onPress={() =>
+							setIncludeFullProfile(!includeFullProfile)
+						}
 					>
 						<CheckboxIndicator mr="$2">
 							{/* <CheckboxIcon as={CheckIcon}/> */}
