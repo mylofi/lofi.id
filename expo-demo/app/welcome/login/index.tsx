@@ -83,6 +83,32 @@ export default function Login() {
 						</FormControlError>
 					</FormControl>
 
+					<Select>
+						<SelectTrigger>
+							<SelectInput placeholder="Select a profile" />
+							{/* <SelectIcon mr="$3">
+                                <Icon as={ChevronDownIcon} />
+                            </SelectIcon> */}
+						</SelectTrigger>
+						<SelectPortal>
+							<SelectBackdrop />
+							<SelectContent>
+								<SelectDragIndicatorWrapper>
+									<SelectDragIndicator />
+								</SelectDragIndicatorWrapper>
+								{Object.keys(profiles).map((profile, index) => {
+									return (
+										<SelectItem
+											key={index}
+											label={profile}
+											value={profile}
+										/>
+									);
+								})}
+							</SelectContent>
+						</SelectPortal>
+					</Select>
+
 					<Textarea>
 						<TextareaInput
 							color="$white"
