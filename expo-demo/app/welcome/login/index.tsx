@@ -1,22 +1,35 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { Alert } from "react-native";
 import { Stack, router } from "expo-router";
 import {
 	Button,
 	ButtonText,
-	FormControl,
-	FormControlError,
-	FormControlErrorText,
-	FormControlLabel,
-	FormControlLabelText,
 	Heading,
-	Input,
-	InputField,
+	Select,
+	SelectBackdrop,
+	SelectContent,
+	SelectDragIndicator,
+	SelectDragIndicatorWrapper,
+	SelectInput,
+	SelectItem,
+	SelectPortal,
+	SelectTrigger,
+	Textarea,
+	TextareaInput,
 	VStack,
 } from "@gluestack-ui/themed";
 
-import { readStoredProfiles } from "@/lib/pwa-app";
-import { sanitize } from "@/lib/pwa-utils";
+import {
+	getProfile,
+	packKeyInfo,
+	readStoredProfiles,
+	saveLoginSession,
+} from "@/lib/pwa-app";
+import { generateAsymmetricKey } from "@/lib/pwa-keys";
+import { fromMnemonic } from "@/lib/pwa-mnemonic";
 
+import { CurrentProfileContext } from "@/context/CurrentProfileContext";
+import { LoginSessionContext } from "@/context/LoginSessionContext";
 import { ProfileNameContext } from "@/context/ProfileNameContext";
 
 import Layout from "@/components/Layout";
