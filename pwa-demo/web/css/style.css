@@ -23,6 +23,104 @@
 	width: 100%;
 }
 
+
+
+
+/* app styling */
+
+body {
+	margin: 0;
+}
+
+.gradient {
+	z-index: -1;
+	position: absolute;
+	background-color: black;
+	width: 100%;
+	height: 100%;
+}
+
+.parent-container {
+	display: flex;
+	justify-content: center;
+	font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+		"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.flex-col-gap {
+	display: flex;
+	flex-direction: column;
+	gap: 6rem;
+}
+
+.flex-col {
+	display: flex;
+	flex-direction: column;
+}
+
+.logo-container {
+	text-align: center;
+}
+
+.logo {
+	display: inline-block;
+	width: 8rem;
+}
+
+.heading {
+	margin: 0;
+	text-align: center;
+	font-weight: 700;
+	color: white;
+	font-size: 2.25rem;
+	line-height: 2.5rem;
+}
+
+/*.form-group {
+	display: flex;
+	flex-direction: column;
+	gap: 0.625rem;
+}*/
+
+input {
+	border-radius: 0.25rem;
+	padding: 0.5rem;
+	border: none;
+	height: 2.5rem;
+	font-size: 1rem;
+	line-height: 1.5rem;
+}
+
+button {
+	border-radius: 0.25rem;
+	background-color: #0077e6;
+	padding: 0.5rem;
+	color: #ffffff;
+	height: 2.5rem;
+	border: none;
+	font-size: 1rem;
+	line-height: 1.5rem;
+}
+
+button:hover {
+	cursor: pointer;
+}
+
+button:active {
+	background-color: #172554;
+}
+
+#profile-details {
+	color: white;
+}
+
+#current-profile-name {
+	margin-right: 1.5em;
+}
+
+
+
+
 /* sweetalert styling */
 .swal2-container {
 	box-sizing: content-box !important;

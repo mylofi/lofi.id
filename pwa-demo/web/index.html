@@ -7,20 +7,93 @@
 </head>
 <body>
 
-<div id="profile-details" class="hidden">
-	<p>
-		<span id="current-profile-name"></span>
-		<button type="button" id="logout-btn">logout</button>
-		<button type="button" id="sync-provide-btn">provide sync</button>
-		<button type="button" id="delete-profile-btn">delete profile</button>
-	</p>
-	<p id="profile-info"></p>
-	<hr>
-	<p>
-		<input type="text" id="new-note" placeholder="add a note...">
-		<button type="button" id="add-note-btn">add</button>
-	</p>
-	<ul id="profile-notes"></ul>
+<div class="gradient">
+	<svg viewBox="0 0 965 1078" fill="none">
+		<g opacity="0.8">
+			<g>
+				<ellipse
+					cx="222.599"
+					cy="277.706"
+					rx="641.842"
+					ry="699.982"
+					fill="url(#paint0_radial_2913_5676)"
+				></ellipse>
+			</g>
+			<g>
+				<ellipse
+					cx="-82.2838"
+					cy="30.7211"
+					rx="463.716"
+					ry="505.721"
+					fill="url(#paint1_radial_2913_5676)"
+				></ellipse>
+			</g>
+		</g>
+		<defs>
+			<radialGradient
+				id="paint0_radial_2913_5676"
+				cx="0"
+				cy="0"
+				r="1"
+				gradientUnits="userSpaceOnUse"
+				gradientTransform="translate(222.599 277.706) rotate(90) scale(780.255 715.448)"
+			>
+				<stop offset="0%" stop-color="#5D4178"></stop>
+				<stop
+					offset="100%"
+					stop-color="#2D1248"
+					stop-opacity="0"
+				></stop>
+			</radialGradient>
+			<radialGradient
+				id="paint1_radial_2913_5676"
+				cx="0"
+				cy="0"
+				r="1"
+				gradientUnits="userSpaceOnUse"
+				gradientTransform="translate(-82.2838 30.7211) rotate(90) scale(563.717 516.895)"
+			>
+				<stop offset="0%" stop-color="#6212B1"></stop>
+				<stop
+					offset="100%"
+					stop-color="#220044"
+					stop-opacity="0"
+				></stop>
+			</radialGradient>
+		</defs>
+	</svg>
+</div>
+
+<div class="parent-container">
+	<div class="flex-col-gap">
+		<div class="flex-col">
+			<div class="logo-container">
+				<img
+					class="logo"
+					src="https://localfirstweb.dev/assets/images/logo.svg"
+					alt="Local-First Community Logo"
+				/>
+			</div>
+
+			<h1 class="heading">Local-First Auth</h1>
+		</div>
+
+		<div id="profile-details" class="hidden">
+			<p>
+				<span id="current-profile-name"></span>
+				<button type="button" id="logout-btn">logout</button>
+				<button type="button" id="sync-provide-btn">provide sync</button>
+				<button type="button" id="delete-profile-btn">delete profile</button>
+			</p>
+			<p id="profile-info"></p>
+			<hr>
+			<p>
+				<input type="text" id="new-note" placeholder="add a note...">
+				<button type="button" id="add-note-btn">add</button>
+			</p>
+			<ul id="profile-notes"></ul>
+		</div>
+	</div>
 </div>
 
 <!-------------------------->
