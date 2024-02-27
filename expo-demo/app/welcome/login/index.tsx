@@ -35,8 +35,8 @@ import { LoginSessionContext } from "@/context/LoginSessionContext";
 import Layout from "@/components/Layout";
 
 export default function Login() {
-	const { profileName, setProfileName } = useContext(ProfileNameContext);
-	const [profileNameError, setProfileNameError] = useState("");
+	const { setCurrentProfile } = useContext(CurrentProfileContext);
+	const { setLoginSession } = useContext(LoginSessionContext);
 
 	function handleCreateProfileName() {
 		const sanitizedProfileName = sanitize(profileName);
