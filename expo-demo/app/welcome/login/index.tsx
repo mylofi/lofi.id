@@ -49,6 +49,12 @@ export default function Login() {
 
 	useEffect(() => {
 		(async () => {
+			const profiles = await readStoredProfiles();
+			if (Object.keys(profiles).length === 0) {
+				router.navigate("/welcome/register");
+			}
+
+			setProfiles(profiles);
 		})();
 	}, []);
 
