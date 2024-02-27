@@ -1,6 +1,6 @@
 {
 	"name": "lofi-id",
-	"version" : "0.0.1",
+	"version" : "0.0.1-a",
 	"scripts": {
 		"pwa:build:web": "pwa-demo/scripts/build-web",
 		"pwa:start": "npx http-server ./pwa-demo/web/ -p 8080"
