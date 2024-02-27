@@ -62,34 +62,6 @@ async function onSyncProvide() {
 	var imgLoadTrigger;
 
 	await Swal.fire({
-		title: "Provide Sync",
-		html: `
-			<p>
-				<label>
-					<input
-						type="checkbox"
-						id="include-profile-in-sync"
-						class="swal2-checkbox"
-						checked
-					>
-					Include full profile
-				</label>
-			</p>
-			<p>
-				Frame:
-				<span id="qr-frame-index"></span> /
-				<span id="qr-frame-count"></span>
-			</p>
-			<div id="sync-qr-code"></div>
-		`,
-		showConfirmButton: true,
-		confirmButtonText: "Done",
-		confirmButtonColor: "darkslateblue",
-
-		showCancelButton: false,
-		allowOutsideClick: false,
-		allowEscapeKey: true,
-
 		didOpen(popupEl) {
 			includeProfileEl = document.getElementById(
 				"include-profile-in-sync"
