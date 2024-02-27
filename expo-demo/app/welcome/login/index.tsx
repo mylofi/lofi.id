@@ -83,6 +83,13 @@ export default function Login() {
 						</FormControlError>
 					</FormControl>
 
+					<Textarea>
+						<TextareaInput
+							color="$white"
+							placeholder="Login ID (word list)"
+						/>
+					</Textarea>
+
 					<VStack space="sm">
 						<Button onPress={() => handleCreateProfileName()}>
 							<ButtonText>Submit</ButtonText>
