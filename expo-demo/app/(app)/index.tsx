@@ -49,7 +49,11 @@ export default function AppIndex() {
 							<ButtonText>Log Out</ButtonText>
 						</Button>
 
-						<Button onPress={() => {}}>
+						<Button
+							onPress={() => {
+								router.navigate("/(app)/provide-sync");
+							}}
+						>
 							<ButtonText>Provide Sync</ButtonText>
 						</Button>
 
