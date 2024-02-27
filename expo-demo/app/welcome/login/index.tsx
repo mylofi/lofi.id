@@ -111,6 +111,9 @@ export default function Login() {
 
 					<Textarea>
 						<TextareaInput
+							onChangeText={(text) => setLoginKeyWords(text)}
+							value={loginKeyWords}
+							autoCapitalize="none"
 							color="$white"
 							placeholder="Login ID (word list)"
 						/>
