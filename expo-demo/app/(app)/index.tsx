@@ -36,20 +36,27 @@ export default function AppIndex() {
 						</Text>
 					</VStack>
 
-					<Button
-						size="md"
-						variant="solid"
-						action="primary"
-						onPress={() => {
-							clearLoginSession(
-								setLoginSession,
-								setCurrentProfile
-							);
-							router.navigate("/welcome");
-						}}
-					>
-						<ButtonText>Log Out</ButtonText>
-					</Button>
+					<VStack space="sm">
+						<Button
+							onPress={() => {
+								clearLoginSession(
+									setLoginSession,
+									setCurrentProfile
+								);
+								router.navigate("/welcome");
+							}}
+						>
+							<ButtonText>Log Out</ButtonText>
+						</Button>
+
+						<Button onPress={() => {}}>
+							<ButtonText>Provide Sync</ButtonText>
+						</Button>
+
+						<Button onPress={() => {}}>
+							<ButtonText>Delete Profile</ButtonText>
+						</Button>
+					</VStack>
 				</VStack>
 			</Layout>
 		</>
